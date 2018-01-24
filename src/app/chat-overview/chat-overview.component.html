@@ -1,0 +1,17 @@
+<div *ngFor="let contact of contacts | async">
+  <div class="contactdiv">
+    <p routerLink="/chat/{{contact.$key}}">
+      {{ contact.name}}
+    </p>
+  </div>
+</div>
+<div>
+  <div *ngIf="afa.authState | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <ng-template #showLogin>
+    <p>Please login.</p>
+    <button (click)="login()">Login</button>
+  </ng-template>
+</div>

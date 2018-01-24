@@ -1,0 +1,34 @@
+<p>
+  showing messages between you and {{ (contact | async)?.name }}
+</p>
+
+<div *ngFor="let message of messages| async">
+    <div *ngIf="!message.owner; else senderMessage">
+        <div class="ownmessage">
+            <p>
+                {{ message.content}}
+              </p>
+              <p>
+                {{ message.datetime| date:'hh:mm:ss'}}
+              </p>
+        </div>
+    </div>
+    
+    <ng-template #senderMessage>
+        <div class="sendermessage">
+            <p>
+                {{ message.content}}
+              </p>
+              <p>
+                {{ message.datetime| date:'hh:mm:ss'}}
+              </p>
+        </div>
+    </ng-template>
+
+  
+</div>
+<div>
+  <p>Send message to  {{ (contact | async)?.name }}</p>
+  <input type='text' class="form-control" id="message" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="msgVal" />
+</div>
+
