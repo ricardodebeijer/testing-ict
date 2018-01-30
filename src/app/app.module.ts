@@ -7,9 +7,17 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'
 import { FooterComponent, HeaderComponent } from './shared';
 import { ModuleWithProviders } from '@angular/core';
-import { ChatOverviewComponent } from './chat-overview/chat-overview.component';
+import { OverviewComponent } from './overview/overview.component';
 import { ChatDetailComponent } from './chat-detail/chat-detail.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { SecurityService } from './security.service';
+import { AuthService } from './auth.service';
+import { ContactService } from './contact.service';
+import { ChatService } from './chat.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserService } from './user.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA",
@@ -21,18 +29,29 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
+
   {
-    path: 'chat/:id',
-    component: ChatDetailComponent
+    path: 'overview',
+    component: OverviewComponent,
+    canActivate: [SecurityService],
+    canLoad: [SecurityService],
+    children: [
+      { path: '', redirectTo: 'chat/0', pathMatch: 'full' },
+      { path: 'chat/:id', component: ChatDetailComponent },
+    ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '',
-    redirectTo: '/',
+    redirectTo: '/overview',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '/'
+    redirectTo: '/overview'
   }
 ];
 
@@ -41,8 +60,11 @@ const appRoutes: Routes = [
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    ChatOverviewComponent,
+    OverviewComponent,
     ChatDetailComponent,
+    LoginComponent,
+    ContactListComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +77,7 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [AuthService, SecurityService, ContactService, ChatService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

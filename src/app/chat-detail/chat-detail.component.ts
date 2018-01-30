@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Contact } from '../contact';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-chat-detail',
@@ -13,31 +14,40 @@ import { Contact } from '../contact';
 })
 export class ChatDetailComponent implements OnInit {
   private contactDoc: AngularFirestoreDocument<Contact>;
-  private messageCollection: AngularFirestoreCollection<Contact>;
   contact: Observable<Contact>;
   messages: Observable<any[]>;
   docuId: string;
   msgVal: string;
+  isContactSelected: boolean;
 
-  constructor(private afs: AngularFirestore, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
-      this.docuId = params['id'];
-      console.log(this.docuId)
-      this.ngOnInit()
-    });
+  constructor(private afs: AngularFirestore, private chatService: ChatService, private route: ActivatedRoute) {
+    // this.route.params.subscribe(params => {
+    //   this.docuId = params['id'];
+    //   console.log('params detail',this.docuId)
+    //   this.ngOnInit()
+    // });
+
+    // this.route.parent.params.subscribe(params => {
+    //   console.log('params parent',params)
+    // });
+
+    // console.log(this.route)
+    // this.route.params.subscribe(params => console.log(params));
   }
 
   ngOnInit() {
-    this.contactDoc = this.afs.doc<Contact>('contacts/' + this.docuId);
-    this.contact = this.contactDoc.valueChanges();
 
-    this.messageCollection = this.contactDoc.collection('messages',
-      ref => ref.orderBy('datetime', 'asc').limit(10));
-    this.messages = this.messageCollection.valueChanges();
+    if (this.docuId) {
+      console.log('nginit docId ok')
+      this.contactDoc = this.afs.doc<Contact>('contacts/' + this.docuId);
+      this.contact = this.contactDoc.valueChanges();
+
+      this.messages = this.chatService.getMessagesForChat(this.contactDoc);
+      this.isContactSelected = true;
+    } else {
+      // console.log('nginit docId null')
+      this.isContactSelected = false;
+    }
   }
 
-  chatSend(message) {
-    this.msgVal = '';
-    this.contactDoc.collection('messages').add({content: message, datetime: Date()})
-  }
 }

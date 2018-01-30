@@ -1,0 +1,54 @@
+<div *ngIf="!authService.isUserEmailLoggedIn">
+	<div class="row">
+		<div class="col-lg-6">
+
+			<p *ngIf="errorMessage.length > 0" class="text-danger">
+				{{errorMessage}}</p>
+
+			<p *ngIf="error.message.length > 0" class="text-danger">
+				{{error.message}}</p>
+
+			<form (ngSubmit)="onLoginEmail()">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="text" class="form-control" id="email" name="email" required [(ngModel)]="email">
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+				</div>
+
+				<button type="submit" class="btn btn-success">Log In</button>
+			</form>
+
+		</div>
+		<!-- <div class="col-lg-6">
+
+			<p *ngIf="errorMessage.length > 0" class="text-danger">
+				{{errorMessage}}</p>
+
+			<p *ngIf="error.message.length > 0" class="text-danger">
+				{{error.message}}</p>
+
+			<form (ngSubmit)="onSignUp()">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+				</div>
+
+				<button type="submit" class="btn btn-success">Register</button>
+			</form>
+
+		</div> -->
+	</div>
+</div>
+<div *ngIf="authService.isUserEmailLoggedIn">
+	<a href="/overview">Al ingelogd, ga naar overview</a>
+	<button class="button" (click)="logout()">Logout</button>
+</div>
