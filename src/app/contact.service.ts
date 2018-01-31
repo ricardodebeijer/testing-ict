@@ -6,13 +6,14 @@ import 'rxjs/add/operator/map';
 import { Contact } from './contact';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ContactService {
-
+  private contactDoc: AngularFirestoreDocument<Contact>;
   myContactsCollection: AngularFirestoreCollection<Contact>;
   myContacts: Observable<any[]>;
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private authService: AuthService) { }
 
   getContactsForUser(uid: string) {
     this.myContactsCollection = this.afs.collection('gebruikers').doc(uid).collection('contacten');
@@ -21,6 +22,15 @@ export class ContactService {
     //   return items.map(item => ({ $key: item.payload.doc.id, ...item.payload.doc.data() }));
     // });;
     return this.myContacts;
+  }
+
+
+  getContact(uid) {
+    this.contactDoc = this.afs.collection('gebruikers')
+      .doc(this.authService.currentUserId)
+      .collection('contacten')
+      .doc<Contact>(uid)
+    return this.contactDoc.valueChanges();
   }
 
   addContactToUser(currentUid, contactUid) {

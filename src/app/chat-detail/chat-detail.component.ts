@@ -2,11 +2,13 @@ import { ModuleWithProviders, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { concat } from 'rxjs/operators';
 import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Contact } from '../contact';
 import { ChatService } from '../chat.service';
 import { AuthService } from '../auth.service';
+import { ContactService } from '../contact.service';
+import { merge } from 'rxjs/operators/merge';
 
 @Component({
   selector: 'app-chat-detail',
@@ -14,17 +16,19 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./chat-detail.component.css']
 })
 export class ChatDetailComponent implements OnInit {
-  private contactDoc: AngularFirestoreDocument<Contact>;
+
   contact: Observable<Contact>;
+  mymessages: Observable<any[]>;
   messages: Observable<any[]>;
+  both: Observable<any[]>;
   docuId: string;
   msgVal: string;
   isContactSelected: boolean;
 
   constructor(
-    private afs: AngularFirestore,
     private chatService: ChatService,
     private authService: AuthService,
+    private contactService: ContactService,
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
@@ -39,14 +43,10 @@ export class ChatDetailComponent implements OnInit {
 
     if (this.docuId) {
       // console.log('nginit docId ok')
+      this.contact = this.contactService.getContact(this.docuId)
+      this.mymessages = this.chatService.getMyMessagesForChat(this.docuId)
+      this.messages = this.chatService.getMessagesForChat(this.docuId)
 
-      this.contactDoc = this.afs.collection('gebruikers')
-        .doc(this.authService.currentUserId)
-        .collection('contacten')
-        .doc<Contact>(this.docuId)
-      this.contact = this.contactDoc.valueChanges();
-
-      this.messages = this.chatService.getMessagesForChat(this.contactDoc)
       this.isContactSelected = true;
     } else {
       // console.log('nginit docId null')
@@ -56,7 +56,7 @@ export class ChatDetailComponent implements OnInit {
 
   sendMessage(message) {
     console.log('sending message to ', this.docuId, ' :', message)
-    this.chatService.sendMessage(this.contactDoc, message)
+    this.chatService.sendMessage(this.docuId, message)
     this.msgVal = ''
   }
 
