@@ -8,27 +8,29 @@ import {
   CanLoad, Route
 } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 @Injectable()
-export class SecurityService implements CanActivate, CanLoad {
+export class SecurityService implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
   }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
-    return this.checkLogin(url);
-  }
+  
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
 
-  canLoad(route: Route): boolean {
-    let url = `/${route.path}`;
-    return this.checkLogin(url);
-  }
-
-  checkLogin(url: string): boolean {
-    if (this.authService.isUserEmailLoggedIn) {
-      return true;
-    } else {
-      this.router.navigate(['/login'])
-      return false;
-    }
+    return this.afAuth.authState
+      .take(1)
+      .map(user => !!user)
+      .do(loggedIn => {
+        if (!loggedIn) {
+          console.log("access denied")
+          this.router.navigate(['/login']);
+        }
+      })
   }
 }

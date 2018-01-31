@@ -34,7 +34,6 @@ const appRoutes: Routes = [
     path: 'overview',
     component: OverviewComponent,
     canActivate: [SecurityService],
-    canLoad: [SecurityService],
     children: [
       { path: '', redirectTo: 'chat/0', pathMatch: 'full' },
       { path: 'chat/:id', component: ChatDetailComponent },
