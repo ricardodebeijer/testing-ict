@@ -29,20 +29,19 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'overview',
     component: OverviewComponent,
     canActivate: [SecurityService],
     children: [
-      { path: '', redirectTo: 'chat/0', pathMatch: 'full' },
-      { path: 'chat/:id', component: ChatDetailComponent },
+      { path: ':id', component: ChatDetailComponent, outlet: 'chat' },
     ]
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
+
   {
     path: '',
     redirectTo: '/overview',

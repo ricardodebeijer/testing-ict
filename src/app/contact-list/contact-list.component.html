@@ -1,8 +1,6 @@
 <h3>Your Contacts</h3>
 <div *ngFor="let contact of contacts | async">
-  <div class="contactdiv">
-    <p routerLink="/chat/{{contact.uid}}">
+    <a  (click)="showChat(contact.uid)">
       {{ contact.name}}
-    </p>
-  </div>
+    </a>
 </div>

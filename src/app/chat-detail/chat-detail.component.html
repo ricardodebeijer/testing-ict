@@ -30,7 +30,7 @@
     </div>
     <div>
         <p>Send message to {{ (contact | async)?.name }}</p>
-        <input type='text' class="form-control" id="message" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)"
+        <input type='text' class="form-control" id="message" placeholder="Chat here..." (keyup.enter)="sendMessage($event.target.value)"
             [(ngModel)]="msgVal" />
     </div>
 </div>

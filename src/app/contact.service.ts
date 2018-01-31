@@ -15,7 +15,7 @@ export class ContactService {
   constructor(private afs: AngularFirestore) { }
 
   getContactsForUser(uid: string) {
-    this.myContactsCollection = this.afs.collection('/gebruikers/HyXEbsaxhsRaxf6ADJ6hzz9mb6o1/contacten');
+    this.myContactsCollection = this.afs.collection('gebruikers').doc(uid).collection('contacten');
     this.myContacts = this.myContactsCollection.valueChanges()
     // .map(items => {
     //   return items.map(item => ({ $key: item.payload.doc.id, ...item.payload.doc.data() }));

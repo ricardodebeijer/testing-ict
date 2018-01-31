@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Contact } from '../contact';
 import { ChatService } from '../chat.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-chat-detail',
@@ -20,34 +21,43 @@ export class ChatDetailComponent implements OnInit {
   msgVal: string;
   isContactSelected: boolean;
 
-  constructor(private afs: AngularFirestore, private chatService: ChatService, private route: ActivatedRoute) {
-    // this.route.params.subscribe(params => {
-    //   this.docuId = params['id'];
-    //   console.log('params detail',this.docuId)
-    //   this.ngOnInit()
-    // });
+  constructor(
+    private afs: AngularFirestore,
+    private chatService: ChatService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      this.docuId = params['id'];
+      // console.log('params detail',this.docuId)
+      this.ngOnInit()
+    });
 
-    // this.route.parent.params.subscribe(params => {
-    //   console.log('params parent',params)
-    // });
-
-    // console.log(this.route)
-    // this.route.params.subscribe(params => console.log(params));
   }
 
   ngOnInit() {
 
     if (this.docuId) {
-      console.log('nginit docId ok')
-      this.contactDoc = this.afs.doc<Contact>('contacts/' + this.docuId);
+      // console.log('nginit docId ok')
+
+      this.contactDoc = this.afs.collection('gebruikers')
+        .doc(this.authService.currentUserId)
+        .collection('contacten')
+        .doc<Contact>(this.docuId)
       this.contact = this.contactDoc.valueChanges();
 
-      this.messages = this.chatService.getMessagesForChat(this.contactDoc);
+      this.messages = this.chatService.getMessagesForChat(this.contactDoc)
       this.isContactSelected = true;
     } else {
       // console.log('nginit docId null')
       this.isContactSelected = false;
     }
+  }
+
+  sendMessage(message) {
+    console.log('sending message to ', this.docuId, ' :', message)
+    this.chatService.sendMessage(this.contactDoc, message)
+    this.msgVal = ''
   }
 
 }

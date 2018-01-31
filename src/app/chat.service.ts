@@ -22,8 +22,8 @@ export class ChatService {
     return this.messages;
   }
 
-  chatSend() {
-    // contactDoc.collection('messages').add({ content: message, datetime: Date() })
+  sendMessage(contactDoc: AngularFirestoreDocument<Contact>, message) {
+    contactDoc.collection('messages').add({ content: message, datetime: Date() })
   }
 
 }
