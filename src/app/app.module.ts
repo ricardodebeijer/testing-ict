@@ -32,10 +32,6 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    component: AppComponent,
-  },
-  {
-    path: '',
     redirectTo: '/chat/none',
     pathMatch: 'full'
   },
