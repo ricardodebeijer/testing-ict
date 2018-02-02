@@ -1,0 +1,7 @@
+<mat-form-field class="example-form-field">
+  <input matInput type="text" placeholder="Send a message..." [(ngModel)]="msgValue" (keyup.enter)="sendMessage($event.target.value)"
+  />
+  <button mat-button *ngIf="msgValue" matSuffix mat-icon-button aria-label="Send" (click)="sendMessage(msgValue)">
+    <mat-icon>send</mat-icon>
+  </button>
+</mat-form-field>

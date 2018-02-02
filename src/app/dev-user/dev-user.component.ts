@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact } from '../contact';
 import { Observable } from 'rxjs/Observable';
 import { ContactService } from '../contact.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-contact-list',
-  templateUrl: './contact-list.component.html',
-  styleUrls: ['./contact-list.component.css']
+  selector: 'app-dev-user',
+  templateUrl: './dev-user.component.html',
+  styleUrls: ['./dev-user.component.css']
 })
-export class ContactListComponent implements OnInit {
+export class DevUserComponent implements OnInit {
+  selected = 'tHnzwWGbIMEm7W9EiurU';
   contacts: Observable<any[]>;
 
   constructor(
     public contactService: ContactService,
+    public userService: UserService,
     private router: Router) { }
 
   ngOnInit() {
     this.contacts = this.contactService.getContactList()
   }
 
-  addTestData() {
-    this.contactService.generateContactList()
+  userChanged(event) {
+    console.log('user changed', event, this.selected)
   }
 
-  selectContact(contact: Contact) {
-    this.router.navigate(['/chat/'+ contact.id]);
-  }
+
 }

@@ -1,38 +1,10 @@
 <div *ngIf="isContactSelected">
-    <p>
-        showing messages between you and {{ (contact | async)?.name }}
-    </p>
-
-    <div *ngFor="let message of mymessages| async">
-        <div class="ownmessage">
-            <p>
-                {{ message.content}}
-            </p>
-            <p>
-                {{ message.datetime| date:'hh:mm:ss'}}
-            </p>
-        </div>
-    </div>
-
-    <div *ngFor="let message of messages| async">
-        <div class="sendermessage">
-            <p>
-                {{ message.content}}
-            </p>
-            <p>
-                {{ message.datetime| date:'hh:mm:ss'}}
-            </p>
-        </div>
-    </div>
-
-    <div>
-        <p>Send message to {{ (contact | async)?.name }}</p>
-        <input type='text' class="form-control" id="message" placeholder="Chat here..." (keyup.enter)="sendMessage($event.target.value)"
-            [(ngModel)]="msgVal" />
-    </div>
+  <h3> Your chat with: {{(contact | async)?.firstname + ' ' + (contact | async)?.lastname}}</h3>
+  <app-message-list [contactId]="contactId"></app-message-list>
+  <app-message-input [contactId]="contactId"></app-message-input>
 </div>
 <div *ngIf="!isContactSelected">
-    <p>
-        nothing selected
-    </p>
+  <p>
+    No chat selected
+  </p>
 </div>

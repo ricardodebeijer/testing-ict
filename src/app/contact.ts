@@ -1,5 +1,10 @@
 export class Contact {
-    name: string
+    id: string
+    firstname: string
+    lastname: string
+    public fullname() {
+        return this.firstname + ' ' + this.lastname
+    }
     username: string
-    uid: string
+    email:string
 }

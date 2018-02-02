@@ -1,14 +1,9 @@
-import { ModuleWithProviders, Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { concat } from 'rxjs/operators';
-import { Router, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Contact } from '../contact';
-import { ChatService } from '../chat.service';
-import { AuthService } from '../auth.service';
 import { ContactService } from '../contact.service';
-import { merge } from 'rxjs/operators/merge';
+import { AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-chat-detail',
@@ -16,48 +11,29 @@ import { merge } from 'rxjs/operators/merge';
   styleUrls: ['./chat-detail.component.css']
 })
 export class ChatDetailComponent implements OnInit {
-
+  private contactDoc: AngularFirestoreDocument<Contact>;
   contact: Observable<Contact>;
-  mymessages: Observable<any[]>;
-  messages: Observable<any[]>;
-  both: Observable<any[]>;
-  docuId: string;
-  msgVal: string;
-  isContactSelected: boolean;
-
+  isContactSelected: boolean = false;
+  contactId : string;
   constructor(
-    private chatService: ChatService,
-    private authService: AuthService,
-    private contactService: ContactService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public contactService: ContactService,
   ) {
     this.route.params.subscribe(params => {
-      this.docuId = params['id'];
-      // console.log('params detail',this.docuId)
-      this.ngOnInit()
-    });
+      let id = params['id'];
+      if (id !== 'none') {
+        this.contactId = id;
+        this.contactDoc = contactService.getContactById(id)
+        this.contact = this.contactDoc.valueChanges()
+        this.isContactSelected = true;
+      } else {
+        this.isContactSelected = false;
+      }
 
+    });
   }
 
   ngOnInit() {
-
-    if (this.docuId) {
-      // console.log('nginit docId ok')
-      this.contact = this.contactService.getContact(this.docuId)
-      this.mymessages = this.chatService.getMyMessagesForChat(this.docuId)
-      this.messages = this.chatService.getMessagesForChat(this.docuId)
-
-      this.isContactSelected = true;
-    } else {
-      // console.log('nginit docId null')
-      this.isContactSelected = false;
-    }
-  }
-
-  sendMessage(message) {
-    console.log('sending message to ', this.docuId, ' :', message)
-    this.chatService.sendMessage(this.docuId, message)
-    this.msgVal = ''
   }
 
 }

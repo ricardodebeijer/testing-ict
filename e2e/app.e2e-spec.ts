@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('chat-test App', () => {
+describe('testing-ict-material App', () => {
   let page: AppPage;
 
   beforeEach(() => {
