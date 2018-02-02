@@ -15,14 +15,16 @@ import { MessageService } from './message.service';
 import { FormsModule } from '@angular/forms';
 import { DevUserComponent } from './dev-user/dev-user.component';
 import { UserService } from './user.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserSearchModalComponent } from './user-search-modal/user-search-modal.component';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA",
-  authDomain: "chat-test-f5bf6.firebaseapp.com",
-  databaseURL: "https://chat-test-f5bf6.firebaseio.com",
-  projectId: "chat-test-f5bf6",
-  storageBucket: "chat-test-f5bf6.appspot.com",
-  messagingSenderId: "705274753851"
+  apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
+  authDomain: 'chat-test-f5bf6.firebaseapp.com',
+  databaseURL: 'https://chat-test-f5bf6.firebaseio.com',
+  projectId: 'chat-test-f5bf6',
+  storageBucket: 'chat-test-f5bf6.appspot.com',
+  messagingSenderId: '705274753851'
 };
 
 const appRoutes: Routes = [
@@ -48,7 +50,9 @@ const appRoutes: Routes = [
     ChatDetailComponent,
     MessageListComponent,
     MessageInputComponent,
-    DevUserComponent
+    DevUserComponent,
+    UserListComponent,
+    UserSearchModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,9 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     )
+  ],
+  entryComponents: [
+    UserSearchModalComponent
   ],
   providers: [ContactService, MessageService, UserService],
   bootstrap: [AppComponent]

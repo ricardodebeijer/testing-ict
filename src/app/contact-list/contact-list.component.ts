@@ -17,14 +17,10 @@ export class ContactListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContactList()
-  }
-
-  addTestData() {
-    this.contactService.generateContactList()
+    this.contacts = this.contactService.getContactListForUser();
   }
 
   selectContact(contact: Contact) {
-    this.router.navigate(['/chat/'+ contact.id]);
+    this.router.navigate(['/chat/' + contact.id]);
   }
 }

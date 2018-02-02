@@ -19,11 +19,11 @@ export class DevUserComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContactList()
+    this.contacts = this.contactService.getContactListForUser();
   }
 
-  userChanged(event) {
-    console.log('user changed', event, this.selected)
+  userChanged() {
+    console.log('user changed', this.selected);
   }
 
 

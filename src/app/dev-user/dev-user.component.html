@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-select [(value)]="selected" placeholder="Selected User" (ngModelChange)="userChanged($event)">
+  <mat-select [(value)]="selected" placeholder="Selected User" >
     <mat-option *ngFor="let contact of contacts | async" [(value)]="contact.id">
       {{contact.username+ ' (' + contact.id + ')'}}
     </mat-option>

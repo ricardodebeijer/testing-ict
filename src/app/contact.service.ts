@@ -2,51 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Contact } from './contact';
 import { Observable } from 'rxjs/Observable';
+import { UserService } from './user.service';
 
 @Injectable()
 export class ContactService {
   myContactsCollection: AngularFirestoreCollection<any>;
   myContacts: Observable<any[]>;
   private contactDoc: AngularFirestoreDocument<Contact>;
-  constructor(private afs: AngularFirestore) {
-    this.myContactsCollection = this.afs.collection('md-contact-list')
-    this.myContacts = this.myContactsCollection.valueChanges()
-  }
-
-  getContactById(id) {
-    let contact = this.afs.collection('md-contact-list').doc<Contact>(id)
-    return contact
-  }
-
-  getContactList() {
-    return this.afs.collection('md-contact-list').snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-  }
-
-  generateContactList() {
-    for (var _i = 0; _i < this.limit; _i++) {
-      let temp = new Contact()
-      temp.firstname = this.getFirstName();
-      temp.lastname = this.getLastName();
-      temp.username = this.getUserName(temp);
-      temp.email = this.getEmail(temp);
-      this.myContactsCollection.add({
-        firstname: temp.firstname,
-        lastname: temp.lastname,
-        username: temp.username,
-        email: temp.email,
-        profilepic: 'https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=ricardo.de.beijer@ict.nl&UA=0&size=HR64x64&sc=1517481366349'
-      })
-    }
-  }
-
-
   // Generating test data
   private limit = 10;
   private firstnames = [
@@ -78,7 +40,7 @@ export class ContactService {
     'Teun',
     'Noud',
     'Mats',
-    'Tim']
+    'Tim'];
   private lastnames = [
     'de Beijer',
     'van den Heuvel',
@@ -199,25 +161,77 @@ export class ContactService {
     'van der Linden ',
     'van der Meer ',
     'van der Meulen '
-  ]
-  private emails = ['ict.nl', 'gmail.com', 'hotmail.com']
+  ];
+  private emails = ['ict.nl', 'gmail.com', 'hotmail.com'];
+
+  constructor(private afs: AngularFirestore, private userService: UserService) {
+    this.myContactsCollection = this.afs.collection('users').doc('rZZEmGjKVnhmjpnwN3Up').collection('contacts');
+    this.myContacts = this.myContactsCollection.valueChanges();
+  }
+
+  getContactById(id) {
+    const contact = this.myContactsCollection.doc<Contact>(id);
+    if (contact === null) {
+      console.log(contact)
+      return undefined;
+    }
+    return contact;
+  }
+
+  getContactListForUser() {
+    return this.myContactsCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      });
+  }
+
+  addContactToCurrentUser(id) {
+    // const user = this.userService.getUserById(id).;
+    // this.myContactsCollection.add({
+    //   user: user.ref,
+    //   id :  user.
+    // })
+    return ''
+  }
+
+  generateContactList() {
+    for (let _i = 0; _i < this.limit; _i++) {
+      const temp = new Contact();
+      temp.firstname = this.getFirstName();
+      temp.lastname = this.getLastName();
+      temp.username = this.getUserName(temp);
+      temp.email = this.getEmail(temp);
+      this.myContactsCollection.add({
+        firstname: temp.firstname,
+        lastname: temp.lastname,
+        username: temp.username,
+        email: temp.email,
+        // tslint:disable-next-line:max-line-length
+        profilepic: 'https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=ricardo.de.beijer@ict.nl&UA=0&size=HR64x64&sc=1517481366349'
+      });
+    }
+  }
 
   private getFirstName() {
-    return this.firstnames[this.randomIntFromInterval(0, this.firstnames.length - 1)]
+    return this.firstnames[this.randomIntFromInterval(0, this.firstnames.length - 1)];
   }
   private getLastName() {
-    return this.lastnames[this.randomIntFromInterval(0, this.lastnames.length - 1)]
+    return this.lastnames[this.randomIntFromInterval(0, this.lastnames.length - 1)];
   }
 
 
   private getUserName(item: Contact) {
-    let name = item.fullname();
-    return name.toLowerCase().replace(/\s/g, "")
+    const name = item.fullname();
+    return name.toLowerCase().replace(/\s/g, '');
   }
 
   private getEmail(item: Contact) {
-    let email = item.username + '@' + this.emails[this.randomIntFromInterval(0, this.emails.length - 1)]
-    return email
+    const email = item.username + '@' + this.emails[this.randomIntFromInterval(0, this.emails.length - 1)];
+    return email;
   }
 
   private randomIntFromInterval(min, max) {

@@ -17,7 +17,7 @@ export class MessageInputComponent implements OnInit {
 
   sendMessage(content) {
     console.log('sending message to ', this.id, ':', content)
-    this.messageService.sendMessage(null, this.id, content);
+    this.messageService.sendMessage(this.id, content);
     this.msgValue = '';
   }
 
