@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class MessageListComponent implements OnInit {
   messages: Observable<any[]>;
   constructor(private messageService: MessageService) { }
-  @Input('contactId') id: string;
+  @Input() id: string;
   ngOnInit() {
     if (this.id) {
       // console.log('getting messages for: ', this.id)

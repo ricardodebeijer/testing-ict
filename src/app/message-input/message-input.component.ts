@@ -8,7 +8,7 @@ import { MessageService } from '../message.service';
 })
 export class MessageInputComponent implements OnInit {
   msgValue = '';
-  @Input('contactId') id: string;
+  @Input() id: string;
 
   constructor(private messageService: MessageService) { }
 

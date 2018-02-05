@@ -17,6 +17,7 @@ import { DevUserComponent } from './dev-user/dev-user.component';
 import { UserService } from './user.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserSearchModalComponent } from './user-search-modal/user-search-modal.component';
+import { AuthService } from './auth.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -69,7 +70,7 @@ const appRoutes: Routes = [
   entryComponents: [
     UserSearchModalComponent
   ],
-  providers: [ContactService, MessageService, UserService],
+  providers: [ContactService, MessageService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

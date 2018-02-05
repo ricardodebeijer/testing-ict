@@ -24,10 +24,10 @@ export class UserSearchModalComponent implements OnInit {
 
 
   addTestData() {
-    this.contactService.generateContactList()
+    this.userService.generateTestUsers();
   }
 
-  addUserToContactList(id){
-this.contactService.addContactToCurrentUser(id);
+  addUserToContactList(id) {
+    this.contactService.addContactToCurrentUser(id);
   }
 }

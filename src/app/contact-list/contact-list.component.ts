@@ -20,7 +20,7 @@ export class ContactListComponent implements OnInit {
     this.contacts = this.contactService.getContactListForUser();
   }
 
-  selectContact(contact: Contact) {
-    this.router.navigate(['/chat/' + contact.id]);
+  selectContact(contact) {
+    this.router.navigate(['/chat/' + contact.userId]);
   }
 }

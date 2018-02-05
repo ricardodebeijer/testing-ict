@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./dev-user.component.css']
 })
 export class DevUserComponent implements OnInit {
-  selected = 'tHnzwWGbIMEm7W9EiurU';
+  selected = 'rZZEmGjKVnhmjpnwN3Up';
   contacts: Observable<any[]>;
 
   constructor(
@@ -19,7 +19,7 @@ export class DevUserComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContactListForUser();
+    this.contacts = this.userService.getAllUsers();
   }
 
   userChanged() {

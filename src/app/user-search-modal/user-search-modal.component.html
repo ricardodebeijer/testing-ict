@@ -1,18 +1,18 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Search for contact</h2>
 <mat-dialog-content>
   <h3>Search for a user</h3>
   <mat-list>
     <mat-list-item *ngFor="let user of users | async">
-        <img matListAvatar src="{{user.profilepic}}" alt="profilepic">
-        <h3 matLine> {{user.firstname + ' ' + user.lastname}} </h3>
-        <p matLine>
-            <span> {{user.username}} </span>
-        </p>
+      <!-- <img matListAvatar src="{{user.profilepic}}" alt="profilepic"> -->
+      <h3 matLine> {{user.firstname + ' ' + user.lastname}} </h3>
+      <p matLine>
+        <span> {{user.username}} </span>
+      </p>
+      <button mat-button color="primary" (click)="addUserToContactList(user.id)">Add to Contacts</button>
     </mat-list-item>
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
   <button mat-raised-button color="primary" (click)="addTestData()">Add Test Users Data</button>
+  <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

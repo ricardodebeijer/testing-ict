@@ -5,4 +5,8 @@ export class AuthService {
 
   constructor() { }
 
+
+  getCurrentUserId() {
+    return 'rZZEmGjKVnhmjpnwN3Up';
+  }
 }

@@ -16,10 +16,10 @@ export class MessageService {
 
   sendMessage(receiver: string, content: string) {
     // let sender = this.userService.getCurrentUserId();
-    this.afs.collection('md-contact-list').doc(receiver).collection('messages').add({
-      // owner: sender,
-      content: content,
-      datetime: Date()
-    })
+    // this.afs.collection('md-contact-list').doc(receiver).collection('messages').add({
+    //   // owner: sender,
+    //   content: content,
+    //   datetime: Date()
+    // })
   }
 }

@@ -1,10 +1,10 @@
 <mat-list>
     <mat-list-item *ngFor="let contact of contacts | async" (click)="selectContact(contact)">
-        <img matListAvatar src="{{contact.profilepic}}" alt="profilepic">
-        <h3 matLine> {{contact.firstname + ' ' + contact.lastname}} </h3>
-        <p matLine>
-            <span> {{contact.username}} </span>
-        </p>
+        <!-- <img matListAvatar src="{{contact.profilepic}}" alt="profilepic"> -->
+        <h3 matLine> {{contact.displayName}} </h3>
+        <!-- <p matLine>
+            <span> {{contact.userId}} </span>
+        </p> -->
     </mat-list-item>
 </mat-list>
 
