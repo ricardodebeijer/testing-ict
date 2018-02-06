@@ -13,9 +13,11 @@ export class ConversationService {
 
   constructor(
     private afs: AngularFirestore,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
-    this.conversationCollection = this.afs.collection('conversations');
+    const memberIdentifier = 'members.' + this.authService.getCurrentUserId().toString();
+    this.conversationCollection = this.afs.collection('conversations', ref => ref.where(memberIdentifier, '==', true));
     this.conversations = this.conversationCollection.valueChanges();
   }
 
