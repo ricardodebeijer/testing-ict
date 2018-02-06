@@ -27,7 +27,6 @@ export class ConversationPanelComponent implements OnInit {
         this.conversationId = id;
         this.conversationDoc = conversationService.getConversationById(id);
         this.conversation = this.conversationDoc.valueChanges();
-        // Todo: fix showing a chat where the contact is not in your contact list, showing as null now... But async prevents below
         this.isConversationSelected = this.conversation !== null;
       } else {
         this.isConversationSelected = false;

@@ -58,23 +58,14 @@ export class ConversationService {
     return this.conversationCollection.doc(id).collection('messages').valueChanges();
   }
 
-  addMessageToConversation(receiver: string, content: string) {
+  addMessageToConversation(conversationId: string, content: string) {
+    const conversation = this.getConversationById(conversationId);
     const sender = this.userService.getCurrentUser();
 
-    // this.afs.collection('messages').doc(this.afs.createId()).set({
-    //   members: [
-    //     sender,
-    //     receiver
-    //   ],
-    //   name: 'Chat van ' + receiver + ' en ' + sender
-    // }).then((doc) => {
-    //   // doc.collection('messages').add({
-    //   //   owner: sender,
-    //   //   content: content,
-    //   //   datetime: Date()
-    //   // });
-    // });
-
-
+    conversation.collection('messages').add({
+      sender: sender.ref.id,
+      content: content,
+      datetime: Date()
+    });
   }
 }

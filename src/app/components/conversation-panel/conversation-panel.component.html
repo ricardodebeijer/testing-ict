@@ -1,7 +1,7 @@
 <div *ngIf="isConversationSelected">
   <h3> Your chat with: {{(conversation | async)?.name}}</h3>
-  <app-message-list [id]="conversationId"></app-message-list>
-  <app-message-input [id]="conversationId"></app-message-input>
+  <app-message-list [(conversationId)]="conversationId"></app-message-list>
+  <app-message-input [(conversationId)]="conversationId"></app-message-input>
 </div>
 <div *ngIf="!isConversationSelected">
   <p>
