@@ -15,11 +15,11 @@ export class MessageInputComponent implements OnInit, OnChanges {
     public conversationService: ConversationService,
   ) { }
   ngOnChanges() {
-    console.log('message list changes ', this.conversationId);
+    // console.log('message list changes ', this.conversationId);
   }
 
   ngOnInit() {
-    console.log('message input ', this.conversationId);
+    // console.log('message input ', this.conversationId);
   }
 
   sendMessage(content) {

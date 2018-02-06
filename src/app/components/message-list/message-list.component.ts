@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ConversationService } from '../../services/conversation.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-message-list',
@@ -12,6 +13,7 @@ export class MessageListComponent implements OnInit, OnChanges {
   messages: Observable<any[]>;
   constructor(
     public conversationService: ConversationService,
+    public authService: AuthService,
   ) { }
   @Input() conversationId: string;
   private oldId: string;
@@ -27,10 +29,14 @@ export class MessageListComponent implements OnInit, OnChanges {
 
   updateMessages() {
     if (this.conversationId !== this.oldId) {
-      console.log('updating messages for: ', this.conversationId);
+      // console.log('updating messages for: ', this.conversationId);
       this.messages = this.conversationService.getMessagesForConversation(this.conversationId);
       this.oldId = this.conversationId;
     }
+  }
+
+  isUserSender(messageSenderId) {
+    return this.authService.getCurrentUserId() === messageSenderId;
   }
 
 }

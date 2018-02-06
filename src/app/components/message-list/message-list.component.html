@@ -1,4 +1,10 @@
 <mat-card *ngFor="let message of messages | async">
-    <mat-card-content>{{message.content}}</mat-card-content>
+    <mat-card-header>{{message.sender}}</mat-card-header>
+    <!-- <mat-card-content> -->
+        <div class="{{isUserSender(message.sender) ? 'senderMessage' : 'receiverMessage'}}">
+            {{message.content}}
+        </div>
+    <!-- </mat-card-content> -->
     <mat-card-footer> {{ message.datetime| date:'HH:mm:ss'}}</mat-card-footer>
+
 </mat-card>
