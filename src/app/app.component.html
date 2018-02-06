@@ -1,16 +1,8 @@
 <div class="mat-app-background basic-container">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span routerLink='/chat/none'>Chat Module</span>
+      <span routerLink='/conversation'>Chat Module</span>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" class="side-container" opened="true">
-      <app-conversation-list></app-conversation-list>
-    </mat-drawer>
-    <mat-drawer-content>
-      <router-outlet></router-outlet>
-    </mat-drawer-content>
-  </mat-drawer-container>
-  <app-dev-user></app-dev-user>
+  <router-outlet></router-outlet>
 </div>

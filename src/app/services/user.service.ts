@@ -12,16 +12,9 @@ export class UserService {
 
 
   constructor(
-    private afs: AngularFirestore,
-    private authService: AuthService
-  ) {
+    private afs: AngularFirestore) {
     this.userCollection = this.afs.collection('users');
     this.users = this.userCollection.valueChanges();
-  }
-
-  getCurrentUser() {
-    const currentId = this.authService.getCurrentUserId();
-    return this.getUserById(currentId);
   }
 
   getUserById(id) {
@@ -40,17 +33,20 @@ export class UserService {
       });
   }
 
-  generateTestUsers() {
-    UserMock.generateTestUsers(10).forEach((item) => {
-      this.userCollection.add(item);
-    });
-
-    this.userCollection.doc(this.authService.getCurrentUserId()).set({
-      firstname: 'Ricardo',
-      lastname: 'de Beijer',
-      username: 'ricardodebeijer',
-      email: 'ricardo.de.beijer@ict.nl',
-      function: 'Graduate'
+  addUserIfNotExisting(item) {
+    console.log('in user service in', item);
+    this.userCollection.doc(item.uid).ref.get().then(docSnapshot => {
+      if (!docSnapshot.exists) {
+        console.log('adding user to /users/' + item.uid);
+        const user = UserMock.generateTestUser();
+        this.userCollection.doc(item.uid).set({
+          firstname: user.firstname,
+          lastname: user.lastname,
+          username: user.username,
+          email: item.email,
+          function: user.function
+        });
+      }
     });
   }
 }

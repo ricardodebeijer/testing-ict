@@ -4,15 +4,16 @@
   <mat-list>
     <mat-list-item *ngFor="let user of users | async">
       <!-- <img matListAvatar src="{{user.profilepic}}" alt="profilepic"> -->
-      <h3 matLine> {{user.firstname + ' ' + user.lastname}} </h3>
-      <p matLine>
-        <span> {{user.username}} </span>
-      </p>
-      <button mat-button color="primary" (click)="startConversationWithUser(user.id)">Start Conversation</button>
+      <div *ngIf="authService.getCurrentUserId() !== user.id">
+        <h3 matLine> {{user.firstname + ' ' + user.lastname}} </h3>
+        <p matLine>
+          <span> {{user.username}}    <button mat-button color="primary" (click)="startConversationWithUser(user.id)">Start Conversation</button> </span>
+        </p>
+     
+      </div>
     </mat-list-item>
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button color="primary" (click)="addTestData()">Add Test Users Data</button>
   <button mat-raised-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

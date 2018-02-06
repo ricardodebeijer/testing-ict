@@ -1,0 +1,11 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" class="side-container" opened="true">
+    <app-conversation-list></app-conversation-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    voor
+    <router-outlet name="chat"></router-outlet>
+    na
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-dev-user></app-dev-user>

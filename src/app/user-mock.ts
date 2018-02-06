@@ -162,6 +162,15 @@ export class UserMock {
         'Consultant',
     ];
 
+    public static generateTestUser() {
+        const temp = new User();
+        temp.firstname = this.getRandomFirstName();
+        temp.lastname = this.getRandomLastName();
+        temp.username = this.getUserName(temp);
+        temp.function = this.getRandomFunction();
+        return temp;
+    }
+
     public static generateTestUsers(amount: number) {
         const users = [];
         for (let _i = 0; _i < amount; _i++) {

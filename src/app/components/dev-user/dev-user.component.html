@@ -1,8 +1,2 @@
-<mat-form-field>
-  <mat-select [(value)]="selected" placeholder="Selected User" >
-    <mat-option *ngFor="let contact of contacts | async" [(value)]="contact.id">
-      {{contact.username+ ' (' + contact.id + ')'}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<p>You selected: {{selected}}</p>
+<p>Logged in as: {{selected}}</p>
+<button (click)="logout()">Logout</button>

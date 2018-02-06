@@ -8,13 +8,15 @@ import { UserSearchModalComponent } from '../user-search-modal/user-search-modal
   styleUrls: ['./user-search-button.component.css']
 })
 export class UserSearchButtonComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(UserSearchModalComponent);
+    const dialogRef = this.dialog.open(UserSearchModalComponent, {
+      width: '500px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);

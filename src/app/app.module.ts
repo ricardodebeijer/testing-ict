@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DemoMaterialModule } from './demo-material/demo-material.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
@@ -17,6 +18,10 @@ import { ConversationService } from './services/conversation.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ConversationPanelComponent } from './components/conversation-panel/conversation-panel.component';
+import { LoginComponent } from './components/login/login.component';
+import { FirebaseAuth } from '@firebase/auth-types';
+import { AuthGuard } from './auth.guard';
+import { ConversationComponent } from './components/conversation/conversation.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -29,17 +34,28 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   {
+    path: 'conversation',
+    component: ConversationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'conversation/:id',
+    outlet: 'chat',
     component: ConversationPanelComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '',
-    redirectTo: '/conversation/none',
+    redirectTo: '/conversation',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '/conversation/none'
+    redirectTo: '/conversation'
   }
 ];
 
@@ -52,7 +68,9 @@ const appRoutes: Routes = [
     MessageInputComponent,
     DevUserComponent,
     UserSearchButtonComponent,
-    UserSearchModalComponent
+    UserSearchModalComponent,
+    LoginComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +79,7 @@ const appRoutes: Routes = [
     DemoMaterialModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
@@ -69,7 +88,7 @@ const appRoutes: Routes = [
   entryComponents: [
     UserSearchModalComponent
   ],
-  providers: [ConversationService, UserService, AuthService],
+  providers: [ConversationService, UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

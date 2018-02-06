@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConversationService } from '../../services/conversation.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dev-user',
@@ -10,21 +11,17 @@ import { ConversationService } from '../../services/conversation.service';
   styleUrls: ['./dev-user.component.css']
 })
 export class DevUserComponent implements OnInit {
-  selected = 'rZZEmGjKVnhmjpnwN3Up';
+  selected = this.authService.getCurrentUserId();
   contacts: Observable<any[]>;
 
   constructor(
-    public conversationService: ConversationService,
-    public userService: UserService,
+    public authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-    this.contacts = this.userService.getAllUsers();
   }
-
-  userChanged() {
-    console.log('user changed', this.selected);
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
-
-
 }
