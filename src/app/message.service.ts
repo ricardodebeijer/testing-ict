@@ -2,24 +2,39 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class MessageService {
 
-  constructor(private afs: AngularFirestore, private userService:UserService) {
+  constructor(
+    private afs: AngularFirestore,
+    private authService: AuthService
+  ) {
 
   }
 
-  getMessagesForContact(id) {
-    return this.afs.collection('md-contact-list').doc(id).collection('messages').valueChanges()
+  getMessagesForConversation(id) {
+    return this.afs.collection('conversations').doc(id).collection('messages').valueChanges();
   }
 
   sendMessage(receiver: string, content: string) {
-    // let sender = this.userService.getCurrentUserId();
-    // this.afs.collection('md-contact-list').doc(receiver).collection('messages').add({
-    //   // owner: sender,
-    //   content: content,
-    //   datetime: Date()
-    // })
+    const sender = this.authService.getCurrentUserId();
+
+    // this.afs.collection('messages').doc(this.afs.createId()).set({
+    //   members: [
+    //     sender,
+    //     receiver
+    //   ],
+    //   name: 'Chat van ' + receiver + ' en ' + sender
+    // }).then((doc) => {
+    //   // doc.collection('messages').add({
+    //   //   owner: sender,
+    //   //   content: content,
+    //   //   datetime: Date()
+    //   // });
+    // });
+
+
   }
 }

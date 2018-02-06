@@ -14,7 +14,7 @@ export class MessageListComponent implements OnInit {
   ngOnInit() {
     if (this.id) {
       // console.log('getting messages for: ', this.id)
-      this.messages = this.messageService.getMessagesForContact(this.id)
+      this.messages = this.messageService.getMessagesForConversation(this.id);
     }
   }
 
