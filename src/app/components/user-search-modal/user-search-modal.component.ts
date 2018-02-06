@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ContactService } from '../contact.service';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-user-search-modal',
@@ -15,7 +15,7 @@ export class UserSearchModalComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public contactService: ContactService,
+    public conversationService: ConversationService,
     private router: Router) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class UserSearchModalComponent implements OnInit {
     this.userService.generateTestUsers();
   }
 
-  addUserToContactList(id) {
-    this.contactService.addContactToCurrentUser(id);
+  startConversationWithUser(id) {
+    this.conversationService.startConversationWithUser(id);
   }
 }

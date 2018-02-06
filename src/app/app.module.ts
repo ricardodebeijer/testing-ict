@@ -3,21 +3,20 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { DemoMaterialModule } from './demo-material/demo-material.module';
-import { ContactListComponent } from './contact-list/contact-list.component';
-import { ChatDetailComponent } from './chat-detail/chat-detail.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { ContactService } from './contact.service';
 import { RouterModule, Routes } from '@angular/router';
-import { MessageListComponent } from './message-list/message-list.component';
-import { MessageInputComponent } from './message-input/message-input.component';
-import { MessageService } from './message.service';
 import { FormsModule } from '@angular/forms';
-import { DevUserComponent } from './dev-user/dev-user.component';
-import { UserService } from './user.service';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserSearchModalComponent } from './user-search-modal/user-search-modal.component';
-import { AuthService } from './auth.service';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { MessageInputComponent } from './components/message-input/message-input.component';
+import { DevUserComponent } from './components/dev-user/dev-user.component';
+import { UserSearchButtonComponent } from './components/user-search-button/user-search-button.component';
+import { UserSearchModalComponent } from './components/user-search-modal/user-search-modal.component';
+import { ConversationService } from './services/conversation.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { ConversationPanelComponent } from './components/conversation-panel/conversation-panel.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -30,29 +29,29 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   {
-    path: 'chat/:id',
-    component: ChatDetailComponent,
+    path: 'conversation/:id',
+    component: ConversationPanelComponent,
   },
   {
     path: '',
-    redirectTo: '/chat/none',
+    redirectTo: '/conversation/none',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '/chat/none'
+    redirectTo: '/conversation/none'
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactListComponent,
-    ChatDetailComponent,
+    ConversationListComponent,
+    ConversationPanelComponent,
     MessageListComponent,
     MessageInputComponent,
     DevUserComponent,
-    UserListComponent,
+    UserSearchButtonComponent,
     UserSearchModalComponent
   ],
   imports: [
@@ -70,7 +69,7 @@ const appRoutes: Routes = [
   entryComponents: [
     UserSearchModalComponent
   ],
-  providers: [ContactService, MessageService, UserService, AuthService],
+  providers: [ConversationService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ContactService } from '../contact.service';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-dev-user',
@@ -14,7 +14,7 @@ export class DevUserComponent implements OnInit {
   contacts: Observable<any[]>;
 
   constructor(
-    public contactService: ContactService,
+    public conversationService: ConversationService,
     public userService: UserService,
     private router: Router) { }
 

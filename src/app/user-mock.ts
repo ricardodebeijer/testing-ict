@@ -195,7 +195,7 @@ export class UserMock {
     }
 
     private static getUserName(item: User) {
-        const name = item.displayName;
+        const name = item.firstname + item.lastname;
         return name.toLowerCase().replace(/\s/g, '');
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MessageService } from '../message.service';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-message-input',
@@ -10,14 +10,16 @@ export class MessageInputComponent implements OnInit {
   msgValue = '';
   @Input() id: string;
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    public conversationService: ConversationService,
+  ) { }
 
   ngOnInit() {
   }
 
   sendMessage(content) {
-    console.log('sending message to ', this.id, ':', content)
-    this.messageService.sendMessage(this.id, content);
+    console.log('sending message to ', this.id, ':', content);
+    this.conversationService.addMessageToConversation(this.id, content);
     this.msgValue = '';
   }
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { Contact } from './contact';
-import { UserMock } from './user-mock';
-import { User } from './user';
+import { UserMock } from '../user-mock';
+import { User } from '../user';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -18,6 +17,11 @@ export class UserService {
   ) {
     this.userCollection = this.afs.collection('users');
     this.users = this.userCollection.valueChanges();
+  }
+
+  getCurrentUser() {
+    const currentId = this.authService.getCurrentUserId();
+    return this.getUserById(currentId);
   }
 
   getUserById(id) {

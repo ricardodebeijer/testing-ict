@@ -8,11 +8,11 @@
       <p matLine>
         <span> {{user.username}} </span>
       </p>
-      <button mat-button color="primary" (click)="addUserToContactList(user.id)">Add to Contacts</button>
+      <button mat-button color="primary" (click)="startConversationWithUser(user.id)">Start Conversation</button>
     </mat-list-item>
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="addTestData()">Add Test Users Data</button>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button color="primary" (click)="addTestData()">Add Test Users Data</button>
+  <button mat-raised-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

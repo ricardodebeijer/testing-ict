@@ -1,12 +1,12 @@
 <div class="mat-app-background basic-container">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span routerLink='/chat/none'>Testing out Chat Module with Angular Material</span>
+      <span routerLink='/chat/none'>Chat Module</span>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" class="side-container" opened="true">
-      <app-contact-list></app-contact-list>
+      <app-conversation-list></app-conversation-list>
     </mat-drawer>
     <mat-drawer-content>
       <router-outlet></router-outlet>

@@ -3,20 +3,18 @@ import { MatDialog } from '@angular/material';
 import { UserSearchModalComponent } from '../user-search-modal/user-search-modal.component';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-user-search-button',
+  templateUrl: './user-search-button.component.html',
+  styleUrls: ['./user-search-button.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserSearchButtonComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(UserSearchModalComponent, {
-      height: '350px'
-    });
+    const dialogRef = this.dialog.open(UserSearchModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);

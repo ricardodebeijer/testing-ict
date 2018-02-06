@@ -1,0 +1,12 @@
+<h4>Conversations</h4>
+<app-user-search-button></app-user-search-button>
+<mat-list>
+    <mat-list-item *ngFor="let conversation of conversations | async" (click)="selectConversation(conversation.id)">
+        <!-- <img matListAvatar src="{{contact.profilepic}}" alt="profilepic"> -->
+        <h3 matLine> {{conversation.name}} </h3>
+        <!-- <p matLine>
+            <span> {{contact.userId}} </span>
+        </p> -->
+    </mat-list-item>
+</mat-list>
+
