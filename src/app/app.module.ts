@@ -6,6 +6,7 @@ import { DemoMaterialModule } from './demo-material/demo-material.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
@@ -25,6 +26,10 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { ConversationInfoComponent } from './components/conversation-info/conversation-info.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
 import { MemberAddComponent } from './components/member-add/member-add.component';
+import { DropZoneDirective } from './drop-zone.directive';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileSizePipe } from './file-size.pipe';
+import { PrefixBaseStoragePathPipe } from './prefix-base-storage-path.pipe';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -73,7 +78,11 @@ const appRoutes: Routes = [
     ConversationComponent,
     ConversationInfoComponent,
     MemberListComponent,
-    MemberAddComponent
+    MemberAddComponent,
+    DropZoneDirective,
+    FileUploadComponent,
+    FileSizePipe,
+    PrefixBaseStoragePathPipe
   ],
   imports: [
     BrowserModule,
@@ -83,6 +92,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only

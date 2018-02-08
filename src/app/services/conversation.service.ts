@@ -87,7 +87,8 @@ export class ConversationService {
     conversation.collection('messages').add({
       sender: sender.ref.id,
       content: content,
-      datetime: Date()
+      datetime: Date(),
+      type: 'text'
     });
   }
 
@@ -98,6 +99,19 @@ export class ConversationService {
       const members = doc.get('members');
       members[member.ref.id] = true;
       conversation.update({ members: members });
+    });
+  }
+
+  addImageToConversation(path: string, conversationId: string) {
+    const conversation = this.getConversationById(conversationId);
+    const sender = this.authService.getCurrentUser();
+    console.log('adding ', path, 'to', conversationId);
+    conversation.collection('messages').add({
+      sender: sender.ref.id,
+      content: 'image @' + path,
+      path,
+      datetime: Date(),
+      type: 'image'
     });
   }
 }

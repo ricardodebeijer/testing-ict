@@ -1,9 +1,15 @@
 <mat-card *ngFor="let message of messages | async">
     <mat-card-header>{{message.sender}}</mat-card-header>
     <!-- <mat-card-content> -->
+
+    <div *ngIf="message.type ">
+        <img src="{{message.path | prefixBaseStoragePath}}" alt="image"> {{message.path | prefixBaseStoragePath}}
+    </div>
+    <div *ngIf="!message.type">
         <div class="{{isUserSender(message.sender) ? 'senderMessage' : 'receiverMessage'}}">
             {{message.content}}
         </div>
+    </div>
     <!-- </mat-card-content> -->
     <mat-card-footer> {{ message.datetime| date:'HH:mm:ss'}}</mat-card-footer>
 

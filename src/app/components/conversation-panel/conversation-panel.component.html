@@ -14,7 +14,7 @@
     </mat-toolbar>
     <app-message-list [(conversationId)]="conversationId"></app-message-list>
     <app-message-input [(conversationId)]="conversationId"></app-message-input>
-
+    <app-file-upload [(conversationId)]="conversationId"></app-file-upload>
   </mat-sidenav-container>
 </div>
 <div *ngIf="!isConversationSelected">
