@@ -1,4 +1,9 @@
-<p>Please login.</p>
-    <button (click)="login('ricardodebeijer')">Login Ricardo</button>
-    <button (click)="login('bartdenpol')">Login Bart</button>
-    <button (click)="login('adamgerritsen')">Login Adam</button>
+<p>Login</p>
+<mat-input-container floatPlaceholder="auto">
+    <input matInput type="text" required [(ngModel)]="usernameValue" placeholder="Username">
+</mat-input-container>
+<mat-input-container floatPlaceholder="auto">
+    <input matInput type="password" required [(ngModel)]="passwordValue" placeholder="Password">
+</mat-input-container>
+<button mat-raised-button (click)="login()">Login</button>
+<p>Register</p>

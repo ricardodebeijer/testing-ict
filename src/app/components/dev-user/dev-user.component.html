@@ -1,5 +1,12 @@
 <div *ngIf="authService.getFirebaseUser() | async as user">
     <p>UID: {{ user.uid }}</p>
     <p>email: {{ user.email }}</p>
-    <button (click)="logout()">Logout</button>
+
 </div>
+<div *ngIf="currentuser | async as user">
+    <p>username: {{ user.username }}</p>
+    <p>firstname: {{ user.firstname }}</p>
+    <p>lastname: {{ user.lastname }}</p>
+</div>
+
+<button (click)="logout()">Logout</button>

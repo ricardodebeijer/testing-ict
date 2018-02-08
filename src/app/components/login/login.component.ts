@@ -9,7 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   returnUrl: string;
-
+  usernameValue = '';
+  passwordValue = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -25,17 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  login(username) {
-    // console.log('username', username);
-    let email = '';
-    if (username) {
-      email = username + '@ict.nl';
-      // console.log('selected', email);
-    } else {
-      email = 'ricardodebeijer@ict.nl';
-    }
-
-    this.authService.login(email, '123456').then((result) => {
+  login() {
+    this.authService.login(this.usernameValue, this.passwordValue).then((result) => {
       if (result) {
         // console.log('redirecting to ', this.returnUrl);
         this.router.navigate([this.returnUrl]);

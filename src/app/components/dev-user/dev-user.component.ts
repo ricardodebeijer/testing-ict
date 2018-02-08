@@ -13,11 +13,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./dev-user.component.css']
 })
 export class DevUserComponent implements OnInit {
-  contacts: Observable<any[]>;
+  currentuser: Observable<any>;
 
   constructor(
     public authService: AuthService,
     private router: Router) {
+    this.currentuser = this.authService.getCurrentUser().valueChanges();
   }
 
   ngOnInit() {
