@@ -22,6 +22,9 @@ import { LoginComponent } from './components/login/login.component';
 import { FirebaseAuth } from '@firebase/auth-types';
 import { AuthGuard } from './auth.guard';
 import { ConversationComponent } from './components/conversation/conversation.component';
+import { ConversationInfoComponent } from './components/conversation-info/conversation-info.component';
+import { MemberListComponent } from './components/member-list/member-list.component';
+import { MemberAddComponent } from './components/member-add/member-add.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -67,13 +70,16 @@ const appRoutes: Routes = [
     UserSearchButtonComponent,
     UserSearchModalComponent,
     LoginComponent,
-    ConversationComponent
+    ConversationComponent,
+    ConversationInfoComponent,
+    MemberListComponent,
+    MemberAddComponent
   ],
   imports: [
     BrowserModule,
+    DemoMaterialModule,
     FormsModule,
     BrowserAnimationsModule,
-    DemoMaterialModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,

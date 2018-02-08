@@ -16,6 +16,7 @@ export class ConversationPanelComponent implements OnInit {
   conversation: Observable<any>;
   isConversationSelected = false;
   conversationId: string;
+  isSideNavOpened: boolean;
   constructor(
     private route: ActivatedRoute,
     public conversationService: ConversationService,

@@ -1,7 +1,21 @@
 <div *ngIf="isConversationSelected">
-  <h3> Your chat with: {{(conversation | async)?.name}}</h3>
-  <app-message-list [(conversationId)]="conversationId"></app-message-list>
-  <app-message-input [(conversationId)]="conversationId"></app-message-input>
+
+  <mat-sidenav-container class="sidecontainer">
+    <mat-sidenav #sidenav mode="side" align="end">
+      <button mat-raised-button (click)="sidenav.toggle()">close</button>
+      <app-conversation-info [(conversationId)]="conversationId"></app-conversation-info>
+    </mat-sidenav>
+    <!-- Body -->
+    <mat-toolbar>
+      <span>
+        <h3> Your chat with: {{(conversation | async)?.name}}</h3>
+      </span>
+      <button mat-raised-button (click)="sidenav.toggle()">open</button>
+    </mat-toolbar>
+    <app-message-list [(conversationId)]="conversationId"></app-message-list>
+    <app-message-input [(conversationId)]="conversationId"></app-message-input>
+
+  </mat-sidenav-container>
 </div>
 <div *ngIf="!isConversationSelected">
   <p>

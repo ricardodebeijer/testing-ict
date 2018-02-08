@@ -1,0 +1,10 @@
+<h3>Conversation info: {{(conversation | async)?.name}}</h3>
+<mat-form-field class="example-form-field">
+  <input matInput type="text" placeholder="Enter a name..." [(ngModel)]="nameValue" (keyup.enter)="updateName($event.target.value)"
+  />
+  <button mat-button *ngIf="nameValue" matSuffix mat-icon-button aria-label="Update" (click)="updateName(nameValue)">
+    <mat-icon>update</mat-icon>
+  </button>
+</mat-form-field>
+<app-member-list [(conversationId)]="conversationId"></app-member-list>
+<app-member-add [(conversationId)]="conversationId"></app-member-add>
