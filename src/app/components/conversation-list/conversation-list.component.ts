@@ -20,6 +20,6 @@ export class ConversationListComponent implements OnInit {
   }
 
   selectConversation(id) {
-    this.router.navigate(['conversation', id]);
+    this.router.navigate(['/conversation', { outlets: { 'convoutlet': [id] } }], { skipLocationChange: true });
   }
 }

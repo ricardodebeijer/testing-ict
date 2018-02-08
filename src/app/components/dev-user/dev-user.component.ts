@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConversationService } from '../../services/conversation.service';
 import { AuthService } from '../../services/auth.service';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-dev-user',
@@ -11,12 +13,12 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dev-user.component.css']
 })
 export class DevUserComponent implements OnInit {
-  selected = this.authService.getCurrentUserId();
   contacts: Observable<any[]>;
 
   constructor(
     public authService: AuthService,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   ngOnInit() {
   }

@@ -1,2 +1,5 @@
-<p>Logged in as: {{selected}}</p>
-<button (click)="logout()">Logout</button>
+<div *ngIf="authService.getFirebaseUser() | async as user">
+    <p>UID: {{ user.uid }}</p>
+    <p>email: {{ user.email }}</p>
+    <button (click)="logout()">Logout</button>
+</div>

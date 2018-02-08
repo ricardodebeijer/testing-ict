@@ -36,13 +36,10 @@ const appRoutes: Routes = [
   {
     path: 'conversation',
     component: ConversationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'conversation/:id',
-    outlet: 'chat',
-    component: ConversationPanelComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      { path: ':id', component: ConversationPanelComponent, outlet: 'convoutlet' }
+    ]
   },
   {
     path: 'login',

@@ -34,7 +34,7 @@ export class UserService {
   }
 
   addUserIfNotExisting(item) {
-    console.log('in user service in', item);
+    // console.log('in user service in', item);
     this.userCollection.doc(item.uid).ref.get().then(docSnapshot => {
       if (!docSnapshot.exists) {
         console.log('adding user to /users/' + item.uid);

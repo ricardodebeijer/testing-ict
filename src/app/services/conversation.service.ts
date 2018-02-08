@@ -17,13 +17,15 @@ export class ConversationService {
     private authService: AuthService
   ) {
     this.updateCollection();
-    this.conversations = this.conversationCollection.valueChanges();
   }
 
   updateCollection() {
-    const memberIdentifier = 'members.' + this.authService.getCurrentUserId();
-    console.log(memberIdentifier);
-    this.conversationCollection = this.afs.collection('conversations', ref => ref.where(memberIdentifier, '==', true));
+    const uid = this.authService.getCurrentUserId();
+    if (uid) {
+      const memberIdentifier = 'members.' + uid;
+      this.conversationCollection = this.afs.collection('conversations', ref => ref.where(memberIdentifier, '==', true));
+      this.conversations = this.conversationCollection.valueChanges();
+    }
   }
 
   async startConversationWithUser(id) {
@@ -34,8 +36,8 @@ export class ConversationService {
     const name = currentUserName + ' & ' + selectedUserName;
     const currentUserId = currentUser.ref.id;
     const selectedUserId = selectedUser.ref.id;
-    console.log(currentUser, currentUserName, currentUserId);
-    console.log(selectedUser, selectedUserName, selectedUserId);
+    // console.log(currentUser, currentUserName, currentUserId);
+    // console.log(selectedUser, selectedUserName, selectedUserId);
     this.conversationCollection.add({
       name: name,
       type: 'personal',
@@ -49,6 +51,10 @@ export class ConversationService {
 
   getConversationsForUser() {
     this.updateCollection();
+    if (!this.conversationCollection) {
+      return;
+    }
+
     return this.conversationCollection.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -60,10 +66,16 @@ export class ConversationService {
   }
 
   getConversationById(id) {
+    if (!this.conversationCollection) {
+      return;
+    }
     return this.conversationCollection.doc<Conversation>(id);
   }
 
   getMessagesForConversation(id) {
+    if (!this.conversationCollection) {
+      return;
+    }
     return this.conversationCollection.doc(id).collection('messages').valueChanges();
   }
 

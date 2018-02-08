@@ -25,10 +25,19 @@ export class LoginComponent implements OnInit {
   }
 
 
-  login() {
-    this.authService.login('bartdenpol@ict.nl', '123456').then((result) => {
+  login(username) {
+    // console.log('username', username);
+    let email = '';
+    if (username) {
+      email = username + '@ict.nl';
+      // console.log('selected', email);
+    } else {
+      email = 'ricardodebeijer@ict.nl';
+    }
+
+    this.authService.login(email, '123456').then((result) => {
       if (result) {
-        console.log('redirecting to ', this.returnUrl);
+        // console.log('redirecting to ', this.returnUrl);
         this.router.navigate([this.returnUrl]);
       } else {
 
