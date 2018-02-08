@@ -18,7 +18,7 @@ export class AuthService {
     this.afa.authState.subscribe(res => {
       if (res && res.uid) {
         this.userDoc = this.userService.getUserById(res.uid);
-        console.log('user is logged in');
+        // console.log('user is logged in');
       } else {
         console.log('user not logged in');
       }

@@ -2,18 +2,17 @@
 <mat-dialog-content>
   <h3>Search for a user</h3>
   <mat-list>
-    <mat-list-item *ngFor="let user of users | async">
-      <!-- <img matListAvatar src="{{user.profilepic}}" alt="profilepic"> -->
-      <div *ngIf="authService.getCurrentUserId() !== user.id">
-        <h3 matLine> {{user.firstname + ' ' + user.lastname}} </h3>
-        <p matLine>
-          <span> {{user.username}}    <button mat-button color="primary" (click)="startConversationWithUser(user.id)">Start Conversation</button> </span>
-        </p>
-     
-      </div>
-    </mat-list-item>
+    <mat-card *ngFor="let user of users | async">
+      <mat-card-header>
+        <mat-card-title>{{user.firstname + ' ' + user.lastname}}</mat-card-title>
+        <mat-card-subtitle> {{user.username}} </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions align="end">
+          <button *ngIf="authService.getCurrentUserId() !== user.id" mat-button color="primary" [mat-dialog-close]="user.id">Start Conversation</button>
+      </mat-card-actions>
+    </mat-card>
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>Close</button>
+  <button mat-raised-button [mat-dialog-close]="null">Close</button>
 </mat-dialog-actions>

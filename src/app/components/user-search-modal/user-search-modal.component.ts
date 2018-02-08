@@ -17,14 +17,11 @@ export class UserSearchModalComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    public conversationService: ConversationService,
     private router: Router) { }
 
   ngOnInit() {
     this.users = this.userService.getAllUsers();
   }
 
-  startConversationWithUser(id) {
-    this.conversationService.startConversationWithUser(id);
-  }
+
 }

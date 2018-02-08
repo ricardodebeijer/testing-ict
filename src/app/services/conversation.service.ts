@@ -7,6 +7,7 @@ import { Conversation } from '../conversation';
 
 @Injectable()
 export class ConversationService {
+
   conversationCollection: AngularFirestoreCollection<Conversation>;
   conversations: Observable<any[]>;
 
@@ -76,7 +77,7 @@ export class ConversationService {
     if (!this.conversationCollection) {
       return;
     }
-    return this.conversationCollection.doc(id).collection('messages').valueChanges();
+    return this.conversationCollection.doc(id).collection('messages', ref => ref.orderBy('datetime', 'asc')).valueChanges();
   }
 
   addMessageToConversation(conversationId: string, content: string) {
@@ -87,6 +88,16 @@ export class ConversationService {
       sender: sender.ref.id,
       content: content,
       datetime: Date()
+    });
+  }
+
+  addMembersToConversation(memberId: string, conversationId: string) {
+    const conversation = this.getConversationById(conversationId);
+    const member = this.userService.getUserById(memberId);
+    conversation.ref.get().then(doc => {
+      const members = doc.get('members');
+      members[member.ref.id] = true;
+      conversation.update({ members: members });
     });
   }
 }

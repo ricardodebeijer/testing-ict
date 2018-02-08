@@ -37,11 +37,11 @@ export class MemberListComponent implements OnInit, OnChanges {
       this.oldId = this.conversationId;
       this.conversationDoc.ref.get().then(doc => {
         const members = doc.get('members');
-        console.log('members', members);
+        // console.log('members', members);
         this.members = [];
         // tslint:disable-next-line:forin
         for (const key in members) {
-          console.log('key', key);
+          // console.log('key', key);
           this.members.push(key);
         }
 
