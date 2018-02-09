@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { Conversation } from '../conversation';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class ConversationService {
@@ -87,7 +88,7 @@ export class ConversationService {
     conversation.collection('messages').add({
       sender: sender.ref.id,
       content: content,
-      datetime: Date(),
+      datetime: firebase.firestore.FieldValue.serverTimestamp(),
       type: 'text'
     });
   }
@@ -108,9 +109,8 @@ export class ConversationService {
     console.log('adding ', path, 'to', conversationId);
     conversation.collection('messages').add({
       sender: sender.ref.id,
-      content: 'image @' + path,
       path,
-      datetime: Date(),
+      datetime: firebase.firestore.FieldValue.serverTimestamp(),
       type: 'image'
     });
   }

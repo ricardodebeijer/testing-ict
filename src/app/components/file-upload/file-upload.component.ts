@@ -20,7 +20,7 @@ export class FileUploadComponent {
   downloadURL: Observable<string>;
   // State for dropzone CSS toggling
   isHovering: boolean;
-  constructor(private storage: AngularFireStorage, private conversationService: ConversationService) {
+  constructor(private afs: AngularFireStorage, private conversationService: ConversationService) {
   }
 
   toggleHover(event: boolean) {
@@ -39,20 +39,17 @@ export class FileUploadComponent {
     // Totally optional metadata
     const customMetadata = { app: 'My AngularFire-powered PWA!' };
     // The main task
-    this.task = this.storage.upload(path, file, { customMetadata });
+    this.task = this.afs.upload(path, file, { customMetadata });
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges().pipe(
-      tap(snap => {
-        if (snap.bytesTransferred === snap.totalBytes) {
-          // Update firestore on completion
-          console.log('calling service', path);
-          this.conversationService.addImageToConversation(path, this.conversationId);
-        }
-      })
-    );
+    this.snapshot = this.task.snapshotChanges();
     // The file's download URL
     this.downloadURL = this.task.downloadURL();
+    this.task.downloadURL().subscribe(url => {
+      console.log('calling service', url);
+      this.conversationService.addImageToConversation(url, this.conversationId);
+      this.percentage = null;
+    });
 
   }
   // Determines if the upload task is active
