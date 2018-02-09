@@ -18,17 +18,17 @@ export class ConversationService {
     private userService: UserService,
     private authService: AuthService
   ) {
-    console.log('conversation service constructor');
+    // console.log('conversation service constructor');
     this.updateCollection();
   }
 
   public updateCollection(givenUid?: string) {
     let uid = this.authService.getCurrentUserId();
-    console.log('updateCollection', uid, givenUid);
+    // console.log('updateCollection', uid, givenUid);
     if (givenUid) {
       uid = givenUid;
     }
-    console.log('updateCollection final', uid);
+    // console.log('updateCollection final', uid);
     if (uid) {
       const memberIdentifier = 'members.' + uid;
       this.conversationCollection = this.afs.collection('conversations', ref => ref.where(memberIdentifier, '==', true));

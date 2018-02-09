@@ -1,8 +1,26 @@
-<div class="mat-app-background basic-container">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span routerLink='/conversation'>Chat Module</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <router-outlet></router-outlet>
+<div class="drag-boundary" [ngClass]="{ 'top-b': !edge?.top, 'bottom-b': !edge?.bottom, 'left-b': !edge?.left, 'right-b': !edge?.right }"
+  #myBounds>
+  <div class="mat-app-background basic-container">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span routerLink='/conversation'>Chat Module</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <button mat-raised-button (click)="toggleWindow()">popup</button>
+
+  <div [ngDraggable]="isDraggable" *ngIf="showWindow" class="chatWindow" (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds">
+    <div>
+      <button mat-raised-button (click)="toggleWindow()">
+        Close dialog
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button (click)="toggleDraggable()">
+        draggable {{isDraggable}}
+      </button>
+    </div>
+    <h4>Tekst hier</h4>
+  </div>
 </div>

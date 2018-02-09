@@ -34,7 +34,7 @@ export class ConversationPanelComponent implements OnInit, OnChanges {
       const id = params['id'];
       if (id !== 'none') {
         this.conversationId = id;
-        console.log('id set', id);
+        // console.log('id set', id);
         this.updatePanel();
       } else {
         this.isConversationSelected = false;
@@ -59,7 +59,7 @@ export class ConversationPanelComponent implements OnInit, OnChanges {
   updatePanel() {
     if (this.conversationId !== this.oldId) {
       this.conversationDoc = this.conversationService.getConversationById(this.conversationId);
-      console.log('conversationDoc set', this.conversationDoc, 'service', this.conversationService);
+      // console.log('conversationDoc set', this.conversationDoc, 'service', this.conversationService);
       this.conversation = this.conversationDoc.valueChanges();
       this.isConversationSelected = this.conversation !== null;
     }
@@ -68,5 +68,4 @@ export class ConversationPanelComponent implements OnInit, OnChanges {
   showChild() {
     this.windowService.createChildWindow(this.conversationId);
   }
-
 }

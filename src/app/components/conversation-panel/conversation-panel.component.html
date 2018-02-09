@@ -12,6 +12,7 @@
       </span>
       <button mat-raised-button (click)="sidenav.toggle()">settings</button>
       <button mat-raised-button (click)="showChild()">child</button>
+   
     </mat-toolbar>
     <app-message-list [(conversationId)]="conversationId"></app-message-list>
     <app-message-input [(conversationId)]="conversationId"></app-message-input>
