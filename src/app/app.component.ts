@@ -14,8 +14,10 @@ export class AppComponent {
     right: true
   };
 
-  
 
+  isChild = true;
+  childUserId = 'AejQxW5MAOQkclVsaWqj0lFB8cn2';
+  childConvId = 'fqPXPLklIVZEGlMXYxyw';
   public showWindow: boolean;
   public isDraggable: boolean;
 

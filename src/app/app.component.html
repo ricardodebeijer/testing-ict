@@ -10,7 +10,7 @@
   </div>
   <button mat-raised-button (click)="toggleWindow()">popup</button>
 
-  <div [ngDraggable]="isDraggable" *ngIf="showWindow" class="chatWindow" (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds">
+  <div [ngDraggable]="isDraggable" *ngIf="showWindow" class="chatWindow" [bounds]="myBounds" [inBounds]="inBounds">
     <div>
       <button mat-raised-button (click)="toggleWindow()">
         Close dialog
@@ -21,6 +21,7 @@
         draggable {{isDraggable}}
       </button>
     </div>
-    <h4>Tekst hier</h4>
+    <app-conversation-panel [(isChild)]="isChild" [(childUserId)]="childUserId" [(childConvId)]="childConvId">
+    </app-conversation-panel>
   </div>
 </div>
