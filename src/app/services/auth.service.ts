@@ -9,16 +9,21 @@ import { Router } from '@angular/router';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 @Injectable()
 export class AuthService {
+  user: Observable<any>;
   userDoc: AngularFirestoreDocument<User>;
   userId;
   constructor(private afa: AngularFireAuth,
     private userService: UserService,
     private router: Router) {
 
+    this.user = new Observable();
+
     this.afa.authState.subscribe(res => {
       if (res && res.uid) {
+        // console.log('user uid', res.uid);
         this.userDoc = this.userService.getUserById(res.uid);
-        // console.log('user is logged in');
+        this.user = new Observable(observer => observer.next(this.userDoc));
+        // console.log('user is logged in', this.userDoc);
       } else {
         console.log('user not logged in');
       }
@@ -27,13 +32,19 @@ export class AuthService {
 
   getCurrentUserId() {
     if (!this.userDoc) {
-      return null;
+      return;
     }
     return this.userDoc.ref.id;
   }
 
   getCurrentUser() {
+    if (!this.userDoc) {
+      return;
+    }
     return this.userDoc;
+  }
+  setUser(uid) {
+    this.userDoc = this.userService.getUserById(uid);
   }
 
   getFirebaseUser() {

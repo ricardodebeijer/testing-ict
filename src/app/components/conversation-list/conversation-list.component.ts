@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { ConversationService } from '../../services/conversation.service';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-conversation-list',

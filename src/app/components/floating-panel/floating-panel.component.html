@@ -1,0 +1,16 @@
+<div>
+  <button mat-button (click)="toggleWindow()">
+    Open dialog
+  </button>
+</div>
+
+<div>
+  <div [ngDraggable]="isDraggable" *ngIf="showWindow" class="chatWindow" ng-class="isDraggable ? 'hovercursor' : ''">
+    <div>
+      <button mat-button (click)="toggleWindow()">
+        Close dialog
+      </button>
+    </div>
+    <h4>Tekst hier</h4>
+  </div>
+</div>

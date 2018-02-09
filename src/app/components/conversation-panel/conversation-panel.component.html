@@ -10,7 +10,8 @@
       <span>
         <h3> Your chat with: {{(conversation | async)?.name}}</h3>
       </span>
-      <button mat-raised-button (click)="sidenav.toggle()">open</button>
+      <button mat-raised-button (click)="sidenav.toggle()">settings</button>
+      <button mat-raised-button (click)="showChild()">child</button>
     </mat-toolbar>
     <app-message-list [(conversationId)]="conversationId"></app-message-list>
     <app-message-input [(conversationId)]="conversationId"></app-message-input>
@@ -21,4 +22,7 @@
   <p>
     No conversation selected
   </p>
+  <p>IsChild: {{isChild}}</p>
+  <p>ConvId: {{childConvId}}</p>
+  <p>UserId: {{childUserId}}</p>
 </div>

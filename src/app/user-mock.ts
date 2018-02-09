@@ -213,7 +213,7 @@ export class UserMock {
         return email;
     }
 
-    private static randomIntFromInterval(min, max) {
+    public static randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 }
