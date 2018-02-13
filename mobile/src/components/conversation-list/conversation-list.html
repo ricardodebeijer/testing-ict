@@ -1,0 +1,5 @@
+  <ion-list>
+    <button ion-item *ngFor="let conversation of conversations | async" (click)="selectConversation(conversation)">
+      {{conversation.name}}
+    </button>
+  </ion-list>

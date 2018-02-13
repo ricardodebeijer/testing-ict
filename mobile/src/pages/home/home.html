@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Chat app
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Conversations</h4>
+<conversation-list></conversation-list>
+<add-conversation></add-conversation>
+
+  
+  <h4>Info</h4>
+  <div *ngIf="authenticationProvider.getFirebaseUser() | async as user">
+    <p>UID: {{ user.uid }}</p>
+    <p>email: {{ user.email }}</p>
+
+  </div>
+</ion-content>

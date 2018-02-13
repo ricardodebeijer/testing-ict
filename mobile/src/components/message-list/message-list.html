@@ -1,0 +1,14 @@
+<ion-list no-lines>
+  <ion-item *ngFor="let message of messages | async">
+    <h3>{{message.sender}}</h3>
+    <div *ngIf="message.type === 'image'">
+      <img src="{{message.path}}" alt="image">
+    </div>
+    <div *ngIf="message.type === 'text'">
+      <div class="{{isUserSender(message.sender) ? 'senderMessage' : 'receiverMessage'}}">
+        <p>{{message.content}}</p>
+      </div>
+    </div>
+    <h4> {{ message.datetime| date:'d-M-y HH:mm:ss'}}</h4>
+  </ion-item>
+</ion-list>
