@@ -8,5 +8,4 @@ import { UserMock } from '../../user-mock';
   styleUrls: ['./floating-panel.component.css']
 })
 export class FloatingPanelComponent {
-  
 }
