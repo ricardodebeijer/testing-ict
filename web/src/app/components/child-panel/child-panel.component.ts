@@ -17,7 +17,7 @@ export class ChildPanelComponent implements OnInit {
   ) {
     const window = this.windowService.getNativeWindow();
     const ids = window.name;
-    console.log('child window', ids);
+    // console.log('child window', ids);
     this.isChild = true;
     this.childConvId = ids.split(',')[0];
     this.childUserId = ids.split(',')[1];

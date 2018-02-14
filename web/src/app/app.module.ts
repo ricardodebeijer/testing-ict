@@ -29,12 +29,9 @@ import { MemberAddComponent } from './components/member-add/member-add.component
 import { DropZoneDirective } from './drop-zone.directive';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileSizePipe } from './file-size.pipe';
-import { PrefixBaseStoragePathPipe } from './prefix-base-storage-path.pipe';
-import { FloatingPanelComponent } from './components/floating-panel/floating-panel.component';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ChildPanelComponent } from './components/child-panel/child-panel.component';
 import { WindowService } from './services/window.service';
-import { FloatingPanelButtonComponent } from './components/floating-panel-button/floating-panel-button.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAAapyesxB8Qa9HawQlvLpONFgbaB_itCA',
@@ -91,10 +88,7 @@ const appRoutes: Routes = [
     DropZoneDirective,
     FileUploadComponent,
     FileSizePipe,
-    PrefixBaseStoragePathPipe,
-    FloatingPanelComponent,
     ChildPanelComponent,
-    FloatingPanelButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +107,6 @@ const appRoutes: Routes = [
   ],
   entryComponents: [
     UserSearchModalComponent,
-    FloatingPanelComponent
   ],
   providers: [WindowService, ConversationService, UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

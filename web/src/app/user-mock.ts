@@ -168,18 +168,14 @@ export class UserMock {
         temp.lastname = this.getRandomLastName();
         temp.username = this.getUserName(temp);
         temp.function = this.getRandomFunction();
+        temp.email = this.getRandomEmail(temp);
         return temp;
     }
 
     public static generateTestUsers(amount: number) {
         const users = [];
         for (let _i = 0; _i < amount; _i++) {
-            const temp = new User();
-            temp.firstname = this.getRandomFirstName();
-            temp.lastname = this.getRandomLastName();
-            temp.username = this.getUserName(temp);
-            temp.email = this.getRandomEmail(temp);
-            temp.function = this.getRandomFunction();
+            const temp = this.generateTestUser();
             users.push({
                 firstname: temp.firstname,
                 lastname: temp.lastname,
