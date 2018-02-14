@@ -20,7 +20,7 @@ export class AuthService {
 
     this.afa.authState.subscribe(res => {
       if (res && res.uid) {
-        // console.log('user uid', res.uid);
+        console.log('user uid', res);
         this.userDoc = this.userService.getUserById(res.uid);
         this.user = new Observable(observer => observer.next(this.userDoc));
         // console.log('user is logged in', this.userDoc);
@@ -56,6 +56,7 @@ export class AuthService {
       this.userService.addUserIfNotExisting(item);
       return true;
     });
+    // return true;
   }
 
   logout() {
