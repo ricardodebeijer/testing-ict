@@ -19,7 +19,7 @@ class AngularFirestoreStub {
   }
 }
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let userService: UserService;
   let afs: AngularFirestore;
 
