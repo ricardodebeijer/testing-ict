@@ -12,11 +12,6 @@ module.exports = function (config) {
         watched: true
       },
       {
-        pattern: './test-config/mocks-ionic.ts',
-        watched: false,
-        served: false
-      },
-      {
         pattern: './src/assets/**/*',
         watched: false,
         included: false,
