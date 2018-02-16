@@ -1,0 +1,37 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <mat-toolbar color="primary">
+    <span>Chat App Login</span>
+  </mat-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-sidenav-container>
+    <mat-sidenav>Start</mat-sidenav>
+    <section padding text-center>
+
+      <h2>Login</h2>
+      <div>
+        <mat-input-container>
+          <input matInput type="text" required [(ngModel)]="usernameValue" placeholder="Username">
+        </mat-input-container>
+      </div>
+      <div>
+        <mat-input-container>
+          <input matInput type="password" required [(ngModel)]="passwordValue" placeholder="Password">
+        </mat-input-container>
+      </div>
+
+      <button mat-raised-button (click)="login()">Login</button>
+
+
+    </section>
+  </mat-sidenav-container>
+
+</ion-content>
