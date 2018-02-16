@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 /**
@@ -9,22 +9,22 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  usernameValue: string;
+  passwordValue: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.usernameValue = ''
+    this.passwordValue = ''
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  login() {
+    if (this.usernameValue === 'test' && this.passwordValue === '1234') {
+      this.navCtrl.push(HomePage)
+    }
   }
-
-  login(){
-    this.navCtrl.push(HomePage)
-  }
-
 }
