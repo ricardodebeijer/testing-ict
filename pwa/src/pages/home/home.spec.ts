@@ -10,6 +10,11 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
 import { MyApp } from '../../app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { firebaseConfig } from '../../config';
 
 describe('Home Page', () => {
     let component: HomePage;
@@ -24,6 +29,10 @@ describe('Home Page', () => {
                 MaterialModule,
                 FormsModule,
                 BrowserAnimationsModule,
+                AngularFireModule.initializeApp(firebaseConfig),
+                AngularFirestoreModule,
+                AngularFireAuthModule,
+                AngularFireStorageModule,
                 IonicModule.forRoot(MyApp)
             ],
             providers: [

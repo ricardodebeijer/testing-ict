@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 /*
   Generated class for the ConversationProvider provider.
@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ConversationProvider {
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
   }
 
 }

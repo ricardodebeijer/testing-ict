@@ -10,14 +10,35 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
 import { MyApp } from '../../app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { firebaseConfig } from '../../config';
+import { UserProvider } from '../../providers/user/user';
 
 describe('Converation Provider', () => {
     let component: ConversationProvider;
+    let afs: AngularFirestore;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                AngularFireModule.initializeApp(firebaseConfig),
+                AngularFirestoreModule,
+                AngularFireAuthModule,
+                AngularFireStorageModule
+            ],
+            providers: [
+                ConversationProvider,
+            ]
+        });
+    }));
 
     beforeEach(() => {
-        component = new ConversationProvider()
+        component = TestBed.get(ConversationProvider);
+        afs = TestBed.get(AngularFirestore);
     });
-
     it('should create provider', () => {
         expect(component).toBeDefined()
     });

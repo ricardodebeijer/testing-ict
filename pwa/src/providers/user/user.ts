@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../../models/User';
 /*
   Generated class for the UserProvider provider.
 
@@ -9,8 +10,16 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class UserProvider {
+  userCollection: AngularFirestoreCollection<User>;
+  users: Observable<any[]>;
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
+    this.userCollection = this.afs.collection('users');
+    this.users = this.userCollection.valueChanges();
+  }
+  getUserById(id) {
+    const user = this.userCollection.doc<User>(id);
+    return user;
   }
 
 }

@@ -16,6 +16,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginComponent {
   usernameValue: string;
   passwordValue: string;
+  message: string
 
   constructor(public navCtrl: NavController, public authProvider: AuthProvider) {
     this.usernameValue = ''
@@ -23,9 +24,15 @@ export class LoginComponent {
   }
 
   login() {
-      if (this.authProvider.login(this.usernameValue, this.passwordValue)) {
+    this.authProvider.login(this.usernameValue, this.passwordValue).then(result => {
+      if (result) {
         this.navCtrl.push(HomePage)
+      }else{
+        this.message = 'invalid username/password';
       }
+    }).catch(err =>{
+      this.message = 'error while logging in';
+    })
   }
 
 }

@@ -3,6 +3,11 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { firebaseConfig } from '../config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -12,7 +17,10 @@ import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { ConversationProvider } from '../providers/conversation/conversation';
+// import { LoginComponent } from '../components/login/login';
+import { ComponentsModule } from '../components/components.module';
 import { LoginComponent } from '../components/login/login';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +34,11 @@ import { LoginComponent } from '../components/login/login';
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(MyApp)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
