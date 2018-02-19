@@ -20,6 +20,11 @@ import { ConversationProvider } from '../providers/conversation/conversation';
 // import { LoginComponent } from '../components/login/login';
 import { ComponentsModule } from '../components/components.module';
 import { LoginComponent } from '../components/login/login';
+import { ConversationListComponent } from '../components/conversation-list/conversation-list';
+import { ConversationComponent } from '../components/conversation/conversation';
+import { MessageListComponent } from '../components/message-list/message-list';
+import { MessageInputComponent } from '../components/message-input/message-input';
+import { ConversationPage } from '../pages/conversation/conversation';
 
 
 @NgModule({
@@ -27,7 +32,12 @@ import { LoginComponent } from '../components/login/login';
     MyApp,
     HomePage,
     LoginPage,
-    LoginComponent
+    ConversationPage,
+    LoginComponent,
+    ConversationListComponent,
+    ConversationComponent,
+    MessageListComponent,
+    MessageInputComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +54,8 @@ import { LoginComponent } from '../components/login/login';
   entryComponents: [
     MyApp,
     LoginPage,
-    HomePage
+    HomePage,
+    ConversationPage
   ],
   providers: [
     StatusBar,

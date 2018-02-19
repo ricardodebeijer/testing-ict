@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ConversationPage } from '../conversation/conversation';
 
 @Component({
   selector: 'page-home',
@@ -14,4 +15,6 @@ export class HomePage {
   logout(){
     this.navCtrl.popToRoot();
   }
+
+ 
 }

@@ -1,15 +1,20 @@
 <ion-header>
-  <mat-toolbar color="primary">
-    <span>Conversation Name</span>
-  </mat-toolbar>
+  <ion-navbar>
+    <ion-title>
+      <mat-toolbar color="primary">
+        <span>Conversation</span>
+      </mat-toolbar>
+    </ion-title>
+  </ion-navbar>
+
 </ion-header>
 
 <ion-content>
   <mat-sidenav-container>
     <mat-sidenav>Start</mat-sidenav>
     <section padding text-center>
-      <conversation-list></conversation-list>
-      <button mat-raised-button (click)="logout()">Logout</button>
+
+      <conversation></conversation>
 
 
     </section>

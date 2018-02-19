@@ -40,11 +40,11 @@ export class AuthProvider {
     return this.afa.auth.signInWithEmailAndPassword(username, password)
       .then((item) => {
         // this.userProvider.addUserIfNotExisting(item);
-        console.log('good',item);
+        // console.log('good',item);
         
         return true;
       }).catch((err) => {
-        console.log('err',err);
+        // console.log('err',err);
         // this.userProvider.addUserIfNotExisting(item);
         return false;
       });
