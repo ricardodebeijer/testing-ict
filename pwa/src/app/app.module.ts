@@ -9,12 +9,17 @@ import { HomePage } from '../pages/home/home';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
 import { LoginPage } from '../pages/login/login';
+import { AuthProvider } from '../providers/auth/auth';
+import { UserProvider } from '../providers/user/user';
+import { ConversationProvider } from '../providers/conversation/conversation';
+import { LoginComponent } from '../components/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { LoginPage } from '../pages/login/login';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AuthProvider,
+    UserProvider,
+    ConversationProvider
   ]
 })
 export class AppModule { }

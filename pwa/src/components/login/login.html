@@ -1,0 +1,13 @@
+<h2>Login</h2>
+      <div>
+        <mat-input-container>
+          <input matInput type="text" required [(ngModel)]="usernameValue" placeholder="Username">
+        </mat-input-container>
+      </div>
+      <div>
+        <mat-input-container>
+          <input matInput type="password" required [(ngModel)]="passwordValue" placeholder="Password">
+        </mat-input-container>
+      </div>
+      
+      <button mat-raised-button (click)="login()">Login</button>

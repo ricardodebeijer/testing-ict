@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { HomePage } from './home';
+import { LoginComponent } from './login';
 import { IonicModule, Platform, NavController, NavParams } from 'ionic-angular/index';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -10,15 +10,20 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
 import { MyApp } from '../../app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthProvider } from '../../providers/auth/auth';
 
-describe('Home Page', () => {
-    let component: HomePage;
-    let fixture: ComponentFixture<HomePage>;
+describe('Login Component', () => {
+    let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
     let nav: NavController;
+    let auth: AuthProvider;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MyApp, HomePage],
+            declarations: [
+                MyApp,
+                LoginComponent
+            ],
             imports: [
                 BrowserModule,
                 MaterialModule,
@@ -29,25 +34,50 @@ describe('Home Page', () => {
             providers: [
                 { provide: NavController, useClass: NavMock },
                 { provide: NavParams, useClass: NavParamsMock },
+                AuthProvider
             ]
         });
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HomePage);
+        fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         nav = TestBed.get(NavController);
+        auth = TestBed.get(AuthProvider);
     });
 
     it('should create component', () => {
         expect(component).toBeDefined()
     });
 
-    it('should logout', () => {
-        spyOn(nav, 'popToRoot');
-
-        component.logout();
-
-        expect(nav.popToRoot).toHaveBeenCalled()
+    it('should have no default password or username', () => {
+        expect(component.passwordValue).toBe('')
+        expect(component.usernameValue).toBe('')
     });
+
+    it('should not redirect when nothing is entered', () => {
+        spyOn(nav, 'push');
+        spyOn(auth, 'login');
+
+        component.login();
+
+        expect(nav.push).not.toHaveBeenCalled()
+        expect(auth.login).toHaveBeenCalled()
+    });
+
+    it('should redirect with credentials', () => {
+        spyOn(auth, 'login').and.returnValue(true);
+        spyOn(nav, 'push');
+
+        component.usernameValue = 'test';
+        component.passwordValue = '1234'
+        component.login();
+
+        expect(nav.push).toHaveBeenCalled()
+        expect(auth.login).toHaveBeenCalled()
+    });
+
 });
+
+
+

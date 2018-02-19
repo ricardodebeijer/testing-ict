@@ -10,15 +10,21 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
 import { MyApp } from '../../app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from '../../components/login/login';
+import { AuthProvider } from '../../providers/auth/auth';
 
-describe('Login Component', () => {
+describe('Login Page', () => {
     let component: LoginPage;
     let fixture: ComponentFixture<LoginPage>;
     let nav: NavController;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MyApp, LoginPage],
+            declarations: [
+                MyApp,
+                LoginPage,
+                LoginComponent
+            ],
             imports: [
                 BrowserModule,
                 MaterialModule,
@@ -29,6 +35,7 @@ describe('Login Component', () => {
             providers: [
                 { provide: NavController, useClass: NavMock },
                 { provide: NavParams, useClass: NavParamsMock },
+                AuthProvider
             ]
         });
     }));
@@ -44,26 +51,5 @@ describe('Login Component', () => {
     });
 
 
-    it('should have no default password or username', () => {
-        expect(component.passwordValue).toBe('')
-        expect(component.usernameValue).toBe('')
-    });
 
-    it('should not redirect when nothing is entered', () => {
-        spyOn(nav, 'push');
-
-        component.login();
-
-        expect(nav.push).not.toHaveBeenCalled()
-    });
-
-    it('should redirect with credentials', () => {
-        spyOn(nav, 'push');
-
-        component.usernameValue = 'test';
-        component.passwordValue = '1234'
-        component.login();
-
-        expect(nav.push).toHaveBeenCalled()
-    });
 });

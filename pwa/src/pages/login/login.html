@@ -7,7 +7,7 @@
 
 <ion-header>
   <mat-toolbar color="primary">
-    <span>Chat App Login</span>
+    <span>Login</span>
   </mat-toolbar>
 </ion-header>
 
@@ -15,19 +15,7 @@
   <mat-sidenav-container>
     <mat-sidenav>Start</mat-sidenav>
     <section padding text-center>
-      <h2>Login</h2>
-      <div>
-        <mat-input-container>
-          <input matInput type="text" required [(ngModel)]="usernameValue" placeholder="Username">
-        </mat-input-container>
-      </div>
-      <div>
-        <mat-input-container>
-          <input matInput type="password" required [(ngModel)]="passwordValue" placeholder="Password">
-        </mat-input-container>
-      </div>
-      
-      <button mat-raised-button (click)="login()">Login</button>
+      <login></login>
     </section>
   </mat-sidenav-container>
 
