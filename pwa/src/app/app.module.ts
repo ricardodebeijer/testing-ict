@@ -29,6 +29,7 @@ import { StartConversationModalPage } from '../pages/start-conversation-modal/st
 import { UserListComponent } from '../components/user-list/user-list';
 import { TimeAgoPipe } from '../pipes/timeago/timeago';
 import '../../rxjs-operators'
+import { AttachmentUploaderComponent } from '../components/attachment-uploader/attachment-uploader';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import '../../rxjs-operators'
     MessageListComponent,
     MessageInputComponent,
     UserListComponent,
+    AttachmentUploaderComponent,
     TimeAgoPipe
   ],
   imports: [

@@ -1,5 +1,8 @@
 <!-- Generated template for the MessageInputComponent component -->
 <ion-input type="text" placeholder="Send a message..." [(ngModel)]="msgValue" (keyup.enter)="sendMessage($event.target.value)"></ion-input>
-<button *ngIf="msgValue" (click)="sendMessage(msgValue)">
-  send
-</button>
+
+<ion-fab bottom right>
+  <button ion-fab *ngIf="msgValue" (click)="sendMessage(msgValue)">
+    <ion-icon name="send"></ion-icon>
+  </button>
+</ion-fab>

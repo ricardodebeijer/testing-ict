@@ -9,6 +9,7 @@ import { ConversationComponent } from './conversation/conversation';
 import { MessageListComponent } from './message-list/message-list';
 import { MessageInputComponent } from './message-input/message-input';
 import { UserListComponent } from './user-list/user-list';
+import { AttachmentUploaderComponent } from './attachment-uploader/attachment-uploader';
 @NgModule({
     declarations: [
         LoginComponent,
@@ -16,7 +17,8 @@ import { UserListComponent } from './user-list/user-list';
     ConversationComponent,
     MessageListComponent,
     MessageInputComponent,
-    UserListComponent
+    UserListComponent,
+    AttachmentUploaderComponent
     ],
     exports: [
         LoginComponent,
@@ -24,7 +26,8 @@ import { UserListComponent } from './user-list/user-list';
     ConversationComponent,
     MessageListComponent,
     MessageInputComponent,
-    UserListComponent
+    UserListComponent,
+    AttachmentUploaderComponent
     ]
 })
 export class ComponentsModule { }

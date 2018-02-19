@@ -1,28 +1,24 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Conversation } from '../../models/Conversation';
 import { ConversationProvider } from '../../providers/conversation/conversation';
+
 /**
- * Generated class for the MessageInputComponent component.
+ * Generated class for the AttachmentUploaderComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-  selector: 'message-input',
-  templateUrl: 'message-input.html'
+  selector: 'attachment-uploader',
+  templateUrl: 'attachment-uploader.html'
 })
-export class MessageInputComponent  {
-
+export class AttachmentUploaderComponent {
   @Input() conversation: Conversation;
   msgValue: string;
 
   constructor(public conversationProvider: ConversationProvider) {
   }
 
-  sendMessage(content) {
-    console.log('sending message to ', this.conversation.id, ':', content);
-    this.conversationProvider.addMessageToConversation(this.conversation.id, content);
-    this.msgValue = '';
-  }
+  
 
 }
