@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Conversation } from '../../models/Conversation';
+import { ConversationProvider } from '../../providers/conversation/conversation';
 /**
  * Generated class for the MessageInputComponent component.
  *
@@ -10,10 +11,19 @@ import { Component } from '@angular/core';
   selector: 'message-input',
   templateUrl: 'message-input.html'
 })
-export class MessageInputComponent {
+export class MessageInputComponent  {
 
+  @Input() conversation: Conversation;
+  msgValue: string;
 
-  constructor() {
+  constructor(public conversationProvider: ConversationProvider) {
+    console.log('Hello MessageInputComponent Component');
+  }
+
+  sendMessage(content) {
+    console.log('sending message to ', this.conversation.id, ':', content);
+    this.conversationProvider.addMessageToConversation(this.conversation.id, content);
+    this.msgValue = '';
   }
 
 }

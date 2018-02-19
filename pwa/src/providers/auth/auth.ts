@@ -12,40 +12,37 @@ import { User } from '../../models/User';
 */
 @Injectable()
 export class AuthProvider {
-  // user: Observable<any>;
-  // userDoc: AngularFirestoreDocument<User>;
+  user: Observable<any>;
+  userDoc: AngularFirestoreDocument<User>;
 
   constructor(private afa: AngularFireAuth, private userProvider: UserProvider) {
-    // this.afa.authState.subscribe(res => {
-    //   if (res && res.uid) {
-    //     this.userDoc = this.userProvider.getUserById(res.uid);
-    //     this.user = new Observable(observer => observer.next(this.userDoc));
-    //   }
-    // });
+    this.afa.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.userDoc = this.userProvider.getUserById(res.uid);
+        this.user = new Observable(observer => observer.next(this.userDoc));
+      }
+    });
   }
 
-  // getCurrentUserId() {
-  //   return this.userDoc.ref.id;
-  // }
+  getCurrentUserId() {
+    if (!this.userDoc) {
+      return;
+    }
+    return this.userDoc.ref.id;
+  }
 
-  // getCurrentUser() {
-  //   return this.userDoc;
-  // }
-
-  // getFirebaseUser() {
-  //   return this.afa.authState;
-  // }
+  getCurrentUser() {
+    if (!this.userDoc) {
+      return;
+    }
+    return this.userDoc;
+  }
 
   login(username: string, password: string) {
     return this.afa.auth.signInWithEmailAndPassword(username, password)
-      .then((item) => {
-        // this.userProvider.addUserIfNotExisting(item);
-        // console.log('good',item);
-        
+      .then((item) => {     
         return true;
       }).catch((err) => {
-        // console.log('err',err);
-        // this.userProvider.addUserIfNotExisting(item);
         return false;
       });
   }

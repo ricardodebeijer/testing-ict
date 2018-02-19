@@ -1,18 +1,26 @@
 <ion-header>
-  <mat-toolbar color="primary">
-    <span>Conversation Name</span>
-  </mat-toolbar>
+  <ion-navbar>
+    <ion-title>
+      <mat-toolbar color="primary">
+        <span>Conversations</span>
+      </mat-toolbar>
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
   <mat-sidenav-container>
+
     <mat-sidenav>Start</mat-sidenav>
     <section padding text-center>
       <conversation-list></conversation-list>
-      <button mat-raised-button (click)="logout()">Logout</button>
-
-
+      <ion-fab right bottom>
+        <button ion-fab (click)="presentModal()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
     </section>
   </mat-sidenav-container>
+
 
 </ion-content>

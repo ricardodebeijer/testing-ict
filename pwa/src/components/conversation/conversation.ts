@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the ConversationComponent component.
@@ -10,11 +10,10 @@ import { Component } from '@angular/core';
   selector: 'conversation',
   templateUrl: 'conversation.html'
 })
-export class ConversationComponent {
+export class ConversationComponent{
 
-
+  @Input() conversation;
   constructor() {
-
   }
 
 }

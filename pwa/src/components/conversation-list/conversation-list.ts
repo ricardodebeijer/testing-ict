@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ConversationPage } from '../../pages/conversation/conversation';
-
+import { Observable } from 'rxjs/observable';
+import { ConversationProvider } from '../../providers/conversation/conversation';
 /**
  * Generated class for the ConversationListComponent component.
  *
@@ -14,12 +15,13 @@ import { ConversationPage } from '../../pages/conversation/conversation';
 })
 export class ConversationListComponent {
 
-  constructor(public navCtrl: NavController) {
-
+  conversations: Observable<any>;
+  constructor(public navCtrl: NavController, public conversationProvider: ConversationProvider) {
+    this.conversations = this.conversationProvider.getConversationsForUser();
   }
 
-  navToConversation(id){
-    this.navCtrl.push(ConversationPage,id);
+  selectConversation(item) {
+    this.navCtrl.push(ConversationPage, item)
   }
 
 }

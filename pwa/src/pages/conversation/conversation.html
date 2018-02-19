@@ -2,11 +2,10 @@
   <ion-navbar>
     <ion-title>
       <mat-toolbar color="primary">
-        <span>Conversation</span>
+        <span>{{item.name}}</span>
       </mat-toolbar>
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
@@ -14,7 +13,7 @@
     <mat-sidenav>Start</mat-sidenav>
     <section padding text-center>
 
-      <conversation></conversation>
+      <conversation [conversation]="item"></conversation>
 
 
     </section>

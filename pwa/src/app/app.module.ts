@@ -25,7 +25,10 @@ import { ConversationComponent } from '../components/conversation/conversation';
 import { MessageListComponent } from '../components/message-list/message-list';
 import { MessageInputComponent } from '../components/message-input/message-input';
 import { ConversationPage } from '../pages/conversation/conversation';
-
+import { StartConversationModalPage } from '../pages/start-conversation-modal/start-conversation-modal';
+import { UserListComponent } from '../components/user-list/user-list';
+import { TimeAgoPipe } from '../pipes/timeago/timeago';
+import '../../rxjs-operators'
 
 @NgModule({
   declarations: [
@@ -33,11 +36,14 @@ import { ConversationPage } from '../pages/conversation/conversation';
     HomePage,
     LoginPage,
     ConversationPage,
+    StartConversationModalPage,
     LoginComponent,
     ConversationListComponent,
     ConversationComponent,
     MessageListComponent,
-    MessageInputComponent
+    MessageInputComponent,
+    UserListComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,8 @@ import { ConversationPage } from '../pages/conversation/conversation';
     MyApp,
     LoginPage,
     HomePage,
-    ConversationPage
+    ConversationPage,
+    StartConversationModalPage,
   ],
   providers: [
     StatusBar,

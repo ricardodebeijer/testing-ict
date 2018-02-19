@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { ConversationPage } from '../conversation/conversation';
+import { StartConversationModalPage } from '../start-conversation-modal/start-conversation-modal';
 
 @Component({
   selector: 'page-home',
@@ -8,13 +9,17 @@ import { ConversationPage } from '../conversation/conversation';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
   }
 
-  logout(){
+  logout() {
     this.navCtrl.popToRoot();
   }
 
- 
+  presentModal() {
+    let modal = this.modalCtrl.create(StartConversationModalPage);
+    modal.present();
+  }
+
 }

@@ -1,5 +1,15 @@
 <!-- Generated template for the ConversationListComponent component -->
-<div>
-  conversation list here
-  <button mat-raised-button (click)="navToConversation(1)">nav to conversation</button>
+<div class="content">
+    <ion-list>
+        <button ion-item *ngFor="let conversation of conversations | async" (click)="selectConversation(conversation)">
+          {{conversation.name}}
+        </button>
+      </ion-list>
+      
+      <ion-fab right bottom>
+          <button ion-fab color="light">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
+        </ion-fab>
 </div>
+
