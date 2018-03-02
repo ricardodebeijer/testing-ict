@@ -34,16 +34,16 @@ export class FileUploadComponent {
       console.error('unsupported file type :( ');
       return;
     }
-    // The storage path
+    // Determine the path where the file will be stored
     const path = `images/${this.conversationId}/${new Date().getTime()}_${file.name}`;
     // Totally optional metadata
     const customMetadata = { app: 'My AngularFire-powered PWA!' };
-    // The main task
+    // Start uploading the file
     this.task = this.afs.upload(path, file, { customMetadata });
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges();
-    // The file's download URL
+    // When finished, get the final URL, and add this to the conversation
     this.downloadURL = this.task.downloadURL();
     this.task.downloadURL().subscribe(url => {
       console.log('calling service', url);
